@@ -19,7 +19,7 @@ int subsetSum(vector<int> &sol, vector<vector<int>> &T ){
         int firstCoord = sol[i];
         fore(j,i,sol.size()){
             int secondCoord = sol[j];
-            res += T[firstCoord][secondCoord]; //Usamos la simetria, redue la complejidad de subsetSum a θ(n**2 / 2)
+            res += T[firstCoord][secondCoord]; //Usamos la simetria, reduce la complejidad de subsetSum a θ(n**2 / 2)
             i != j ? res +=T[secondCoord][firstCoord] : res+=0; //evitamos el caso de que son lo mismo
 
         }
@@ -28,7 +28,7 @@ int subsetSum(vector<int> &sol, vector<vector<int>> &T ){
 }
 int best = -1;
 void solve(vector<int> solParcial, int i,vector<vector<int>> &T, vector<int> &res){
-    if(i == n && solParcial.size() < k){ //n la cantidad de pos distintas,k la cantidad de choices
+    if(solParcial.size() + (n - (i)) < k ){ //Si tus cantidad actual + la cantidad de elementos erstantes que podrias o no poner, no llegan a sumar k, ni te gastes
         return;
     }else if(solParcial.size() == k){
         int SumAct = subsetSum(solParcial,T);
