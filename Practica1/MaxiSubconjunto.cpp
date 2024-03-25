@@ -8,7 +8,7 @@ typedef long long ll;
 //Complejidad espacial : O(n² + k )
 //Complejidad de tiempo SIN LA PODA , GENERANDO EL ARBOL COMPLETO esta implementacion poda
 // O(2^n + C(n,k) *n**2 / 2) 
-// Obs: solo las maneras validas de agarrar tres elementos son checkeadas cuadraticamente, /2 por la simetria
+// Obs: solo las maneras validas de agarrar k elementos son checkeadas cuadraticamente, /2 por la simetria
 
 
 const int NINF = -1e9;
