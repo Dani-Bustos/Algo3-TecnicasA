@@ -12,6 +12,14 @@ int main(){
     
     cin >> n >> k;
     
+   
+    fore(i,0,n){
+        int temp;
+        cin >> temp;
+        Espacio.push_back(temp);
+    }
+    //Botom up memoria n*k
+    /*
     fore(i,0,n+1){
         vector<int> fila(n+1);
         fore(j,0,n+1) {
@@ -20,21 +28,21 @@ int main(){
         
         MEMO.push_back(fila);
     }
-    fore(i,0,n){
-        int temp;
-        cin >> temp;
-        Espacio.push_back(temp);
-    }
-    //Botom up
+   
+   
+   
     fore(j,0,k+1){
-        MEMO[0][j] = 0;
+        MEMO[0][j] = (j == 0);
     }
     fore(i,1,n+1){
         fore(j,0,k+1){
-            MEMO[i][j] = MEMO[i-1][j] || (j - Espacio[i] >= 0 && MEMO[i-1][j-Espacio[i]]);
+            MEMO[i][j] = MEMO[i-1][j] || (j - Espacio[i-1] >= 0 && MEMO[i-1][j-Espacio[i-1]]);
         }
     }
+    */
+    
     cout << MEMO[n][k];
+    //Bottom up memoria k
 
 }
 
