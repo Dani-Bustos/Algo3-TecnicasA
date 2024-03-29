@@ -39,11 +39,13 @@ int main(){
             MEMO[i][j] = MEMO[i-1][j] || (j - Espacio[i-1] >= 0 && MEMO[i-1][j-Espacio[i-1]]);
         }
     }
-    */
+    
+   
     
     cout << MEMO[n][k];
+    */
     //Bottom up memoria k
-
+    int a[k];
 }
 
 bool solve(int i,int k){
