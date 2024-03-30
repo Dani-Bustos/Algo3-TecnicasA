@@ -35,5 +35,5 @@ int main(){
     }
     cout << AstroTrade(0,0);
     //algoritmo bottom up(TODO)
-    
+
 }
