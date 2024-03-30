@@ -20,14 +20,8 @@ int main(){
     }
     //Botom up memoria n*k
     /*
-    fore(i,0,n+1){
-        vector<int> fila(n+1);
-        fore(j,0,n+1) {
-            fila[j] = INV;
-            }
-        
-        MEMO.push_back(fila);
-    }
+    MEMO.resize( n + 1, vector<int>(n+1,INV));
+    
    
    
    
@@ -45,7 +39,17 @@ int main(){
     cout << MEMO[n][k];
     */
     //Bottom up memoria k
-    int a[k];
+    //Solo necesitamos acordarnos del "piso previo" de la matriz, ya que la recursion solo depende de unv alr
+    vector<bool> act(k+1,false);
+    vector<bool> prev(k+1,false);
+    prev[0] = true;
+    fore(i,0, n){
+       fore(j,1,k+1){
+        act[j] = prev[j] || (j - Espacio[i] >= 0 && prev[j-Espacio[i]]);
+       }
+        prev = act;
+    }
+    cout << act[k];
 }
 
 bool solve(int i,int k){
@@ -55,8 +59,7 @@ bool solve(int i,int k){
     if(MEMO[i][k] != INV) return MEMO[i][k];
     MEMO[i][k] = solve(i - 1,k) || solve(i-1,k-Espacio[i]);
     return MEMO[i][k]; 
-    
-   
+       
     
 }
 
