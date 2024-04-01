@@ -39,7 +39,7 @@ int main(){
     cout << MEMO[n][k];
     */
     //Bottom up memoria k
-    //Solo necesitamos acordarnos del "piso previo" de la matriz, ya que la recursion solo depende de unv alr
+    //Solo necesitamos acordarnos del "piso previo" de la matriz, ya que la recursion solo depende de una variable
     vector<bool> act(k+1,false);
     vector<bool> prev(k+1,false);
     prev[0] = true;
