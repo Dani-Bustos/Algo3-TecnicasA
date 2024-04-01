@@ -1,9 +1,10 @@
 #include<bits/stdc++.h>
 #define fore(i,a,b) for(int i = a; i< b; i++)
 using namespace std;
-//complejidad temporal : O(C((n-1 + m-1),n-1)) C es el numero combinatorio. 
+//complejidad temporal(sin dp) : O(C((n-1 + m-1),n-1)) C es el numero combinatorio. 
+//complejidad temporal(con dp) : O(n*m);
 // complejidad espacial: O(n*m)
-// Es reordenar los movimientos de abajo y al a derecha,con elegir uno definis los otros,
+// Es reordenar los movimientos de abajo y a la derecha,con elegir uno definis los otros,
 // para mas info buscar problema de cuantos caminos hay de una punta de un tablero de ajedrez a la otra
 
 const int INF = 1e9; const int INDEF = 0;
@@ -40,6 +41,7 @@ int main(){
     }
     //cout << solve(0,0);
     //DP Bottom up, memoria O(n*m);
+    /*
     vector<vector<int>> dp(n,vector<int>(m,INDEF));
     for(int i = n-1; i>= 0; i--){
         for(int j = m-1; j>= 0; j--){
@@ -58,6 +60,46 @@ int main(){
         }
     }
     cout << dp[0][0];
+    */
+    
+    
+    //DP bottom up memoria O(min(n,m)) 
+    // observemos, que como vamso de atras para adelante, solo necesitamos comparar entre dos instancias ya procesadas, uno hacia la derecha o uno hacia abajo.
+    // hacia la derecha se puede representar como la posicion actual(ya fue procesada antes), y la derecha como uno hacia adelante(tambien procesada, ya que vamosd de atras para adelante)
+    // este mismo proceso inverso se puede realizar cuando tenemos menos filas que columnas    
+    int memMax = min(n,m);
+    vector<int> dpOPT(min(n,m),INDEF);
+    if( memMax == m){
+    for(int i = n-1 ; i>= 0;i--){
+        for(int j = memMax-1; j>= 0;j--){
+            int res;
+            if(j == tablero[0].size()-1){
+                res =  i!= n-1 ?dpOPT[j] - tablero[i][j] : 1-tablero[i][j]; 
+        
+            }else if(i == tablero.size()-1){
+                res =  dpOPT[j+1] - tablero[i][j];
 
-
+            }else{
+                res = min(dpOPT[j],dpOPT[j+1]) - tablero[i][j];
+            }
+            dpOPT[j] = res <= 0 ? 1 : res;
+        
+        }
+    }
+    }else{ 
+        for(int j = m-1; j>=0; j--){
+            for(int i = memMax-1; i>=0;i--){
+                int res;
+                if(i == tablero.size()-1){
+                    res = (j != m -1? dpOPT[i] - tablero[i][j]:1-tablero[i][j] );
+                }else if(j == tablero[0].size()-1){
+                    res = dpOPT[i+1] - tablero[i][j];
+                }else{
+                    res = min(dpOPT[i+1],dpOPT[i]) - tablero[i][j];
+                }
+                dpOPT[i] = (res <= 0 ? 1 : res);
+            }
+        }
+    }
+    cout << dpOPT[0];
 }
