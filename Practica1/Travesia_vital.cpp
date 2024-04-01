@@ -3,7 +3,8 @@
 using namespace std;
 //complejidad temporal(sin dp) : O(C((n-1 + m-1),n-1)) C es el numero combinatorio. 
 //complejidad temporal(con dp) : O(n*m);
-// complejidad espacial: O(n*m)
+// complejidad espacial(sin optimizacion): O(n*m)
+// complejidad espacial(con optimizacion): O(min(n,m))
 // Es reordenar los movimientos de abajo y a la derecha,con elegir uno definis los otros,
 // para mas info buscar problema de cuantos caminos hay de una punta de un tablero de ajedrez a la otra
 
