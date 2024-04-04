@@ -9,7 +9,7 @@ int solve(int i,int tol){
     return NEGINF ;
   }else if(i == pesos.size()){
     return 0;
-  }else if(tol != INF && memo[i][tol] != INDEF){
+  }else if( memo[i][tol] != INDEF){
     return memo[i][tol];
   }else{
     //solo nos interesa el menor de los soportes, ya que ese nos condiciona todo lo demas
@@ -33,6 +33,6 @@ int main(){
     maxSoporte = max(maxSoporte,soportes[i]);
   }
   memo.resize(n,vector<int>(maxSoporte,INDEF));
-  cout << solve(0,INF);
-
+  cout << solve(0,INF); //nunca nada va a ser mas grande que eso
+     
 }
