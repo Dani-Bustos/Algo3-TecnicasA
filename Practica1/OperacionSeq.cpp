@@ -23,7 +23,7 @@ bool tieneRaizN(int num,int raiz){
 }
 
 vector<char> res;
-//complejidad : si esta completa la matriz tarda O(n)
+//complejidad : si esta completa la matriz , esto tarda Θ(n)
 vector<char> get_seq(int i = 0, int target = 0){
     if(i == nums.size()){
         return res;
@@ -59,9 +59,31 @@ int main(){
   fore(i,0,n){
     cin >> numeros[i];
   }
+  //top down 
+  /*
   MEMO.resize(n,vector<int>(w+1,INDEF));
   auto solucion = secuenciaOperacionesW(w,numeros);
   for(auto x : solucion){
     cout << x << " ";
   }
+  */
+  
+  //bottom up , optimizacion de memoria O(2*w) = O(w)
+   //complejidad temporal : O(w*n)
+   //observacion, con la optimizacion de memoria no podemos  recuperar la solucion
+  vector<bool> dp(w+1,false);
+  vector<bool> prev(w+1,false);
+  prev[w] = true;
+  for(int i = n-1;i>=0;i--){
+    for(int current = w;current>=0;current--){
+        //checkeamos si es una instancia valida antes de acceder, usando la logica secuencial
+        dp[current] = (current+numeros[i] <= w && prev[current+numeros[i]]) 
+                     || (current*numeros[i] <= w && prev[current*numeros[i]]) 
+                     || (pow(current,numeros[i]) <= w && prev[pow(current,numeros[i])]);
+    }
+    prev = dp;
+  }
+
+
+
 }
