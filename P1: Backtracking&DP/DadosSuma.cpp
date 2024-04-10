@@ -25,14 +25,24 @@ int f(int dados,int num){
     }
 }
 int g(int dados,int num,int caras){
-    
-}
+    if( (num <= 0  && dados > 0)  || (num > 0 && dados == 0)){
+        return 0;
+    }else if(num == 0 && dados == 0){
+        return 1;
+    }else{
+        int sum = 0;
+        fore(i,1,caras+1){
+            sum+= g(dados-1,num-i,caras-1);
+        }  
+        return sum;
+    }
+}   
 
 int main(){
     int n,s; //dados,caras,suma objetivo
     cin >> n >> k >> s;
     //si la suma se pasa de lo maximo posible, no nos interesa, la funcion nos va a dar 0
     MEMO.resize(n,vector<int>(min(n*k,s),INDEF));
-    cout << f(n,s);
+    cout << g(n,s,k);
 
 }

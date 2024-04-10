@@ -65,8 +65,8 @@ int main(){
     
     
     //DP bottom up memoria O(min(n,m)) 
-    // observemos, que como vamos de atras para adelante, solo necesitamos comparar entre dos instancias ya procesadas, uno hacia la derecha o uno hacia abajo.
-    // hacia la derecha se puede representar como la posicion actual(ya fue procesada antes), y la derecha como uno hacia adelante(tambien procesada, ya que vamos de atras para adelante)
+    // observemos, que como vamso de atras para adelante, solo necesitamos comparar entre dos instancias ya procesadas, uno hacia la derecha o uno hacia abajo.
+    // hacia la derecha se puede representar como la posicion actual(ya fue procesada antes), y la derecha como uno hacia adelante(tambien procesada, ya que vamosd de atras para adelante)
     // este mismo proceso inverso se puede realizar cuando tenemos menos filas que columnas    
     int memMax = min(n,m);
     vector<int> dpOPT(min(n,m),INDEF);
