@@ -17,7 +17,7 @@ int solve(int posInicial, int posFinal){
         else{
         // lo utilizamos para calcular inplace
         int Intervalo = (posFinal - posInicial) / 2;
-        //el numero q buscamos en esta posicion mediana
+        //el numero que buscamos en esta posicion mediana
         int target = posInicial + Intervalo + 1;
         if(a[posInicial + Intervalo] == target){
             return target;
