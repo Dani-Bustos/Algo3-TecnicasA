@@ -27,6 +27,7 @@ public:
 	}
 };
 int solve(Node *actual);
+int altura(Node *actual);
 int main()
 {
 	/*create root*/
@@ -53,10 +54,15 @@ int main()
 	   /   \
 	  2	     3
 	/  \    /    \
-	4   NULL  NULL  NULL
-	/  \
+	4   7  NULL  NULL
+		\
+		1
+	/	 \8  
+	\
 	NULL NULL
 	*/
+  
+	root->left->right = new Node(7); root->left->right->right = new Node(1);root->left->right->right->right = new Node(8);
 	cout << solve(root);
 }
 
@@ -68,11 +74,15 @@ int solve(Node *actual){
     if(actual->left == NULL && actual->right == NULL){
         return 0;
     }else if(actual->left == NULL){
-        return solve(actual->right) + 1;
+        return max(solve(actual->right),altura(actual->right) + 1);
     }else if(actual->right == NULL){
-        return solve(actual->left) + 1;
+        return max(solve(actual->left),altura(actual->left) + 1);
     }else {
-        return max(solve(actual->left) + 1,solve(actual->right) + 1);
+        return max(altura(actual->left) + altura(actual -> right) + 1 ,max(solve(actual->left),solve(actual->right)));
     }
 }
 
+int altura(Node *actual){
+	if(actual == NULL) return 0;
+	else return max(altura(actual-> right)+1,altura(actual->left) +1);
+}
