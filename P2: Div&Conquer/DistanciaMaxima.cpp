@@ -6,7 +6,10 @@ const long long INDEF = -1;
 
 #include <bits/stdc++.h>
 using namespace std;
-
+// una solución recursiva válida es: max(f(izq), f(der), altura(der) + altura(izq) +1)
+// checkear en cada caso la posibilidad de ir a la izq o der.
+// caso base ni izq ni der => 1
+//La complejidad depende de si usamos o no memoización para las alturas , con DP Sale en O(n)
 class Node {
 public:
 	int data;
