@@ -10,6 +10,8 @@ using namespace std;
 // checkear en cada caso la posibilidad de ir a la izq o der.
 // caso base ni izq ni der => 1
 //La complejidad depende de si usamos o no memoización para las alturas , con DP Sale en O(n)
+//supongamos matriz precomputada de alturas y arbol balanceado : T(N) = 2T(N/2) + Θ(1) 
+// por teo maestro eso es Θ(n)
 class Node {
 public:
 	int data;
