@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+El algoritmo greedy es tomar siempre los 2 mínimos es el paso óptimo, tomando en cuenta los pasos anteriores
+Sea G el resultado del Greedy y O la solucion optima con A el multiconjunto numerico ordenado crecientemente
+
+\[ A = \{a_1, a_2,\dots, a_n\} \] 
+Sea \( P(N) \):= G = O para un conjunto de N elementos
+
+\begin{itemize}
+	
+    
+\item Si hay solo un elemento: tomar el  mínimo = óptimo.
+    
+    \item Supongamos que existe un \( N_0 \) tal que \( P(N) \) es correcto \(\forall n' \le n_0 \), 
+    \\¿\( P(N_0) \rightarrow P(N_0 + 1) \)?  Todo esto que sigue aca esta mal\\
+    
+    \( O_{n_0+1} \ge O_{n0} + min(eleccion)  =^{HI} G_{n0} + min(eleccion)\)
+    
+    Si \(G_{n_0}\) \( < a_{n_0+1}  < a_{n_0+2} \) entonces el mejor es \( a_{n0+1} \) y \( a_{n_0+2} \).
+    
+    Si \(G_{n_0}\) \( > a_{n_0+1} \) y \(G_{n0}\) \( < a_{n_0+2} \) entonces el mejor es \( a_{n_0+1} \) y la instancia previa.
+    
+    Si \(G_{n_0}\) \( > a_{n_0+2}  >  a_{n_0+1} \), entonces el mejor es \( a_{n_0+1} \) y \( a_{n_0+2} \).
+    
+    Luego, para todos los casos, tomar siempre los 2 mínimos es la mejor opción.  Y \(G_{n_0 + 1} \) = \(O_{n_0+1}\), luego G es correcto 
+    
+\end{itemize}
+
+\end{document}
+
+
+
+
+
+
