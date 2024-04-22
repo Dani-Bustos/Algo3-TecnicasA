@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+Sea \(G\) la solución greedy para \( U, k \) dados, y sea \( O \) la solución óptima.
+
+\begin{itemize}
+    \item Si \( G > \text{Optimo} \), es absurdo por definicion. Por lo tanto, \( G < \text{Optimo} \) o \( G = \text{Optimo} \).
+    
+    \item Si \( G = \text{Optimo} \), es trivialmente cierto.
+    
+    \item Si \( G < \text{Optimo} \): Sea \( i \) el primer índice donde \( O \) y \( G \) difieren. Por definición:
+    
+    \[ O = \{x_1, x_2, \dots, x_{i'}, x_{i' + 1}, \dots, x_n\} \]
+    
+    Dado que \( \forall {j'} \geq i: x_{j'} \leq x_i \) y  en particular (1) \( x_{i'} < x_i \), podemos considerar \( O^* = (O \cup \{x_i\}) - \{x_{i'}\} \)
+		 \[ O^* = (O \cup \{x_i\}) - \{x_{i'}\} = \{x_1, x_2, \dots, x_{i-1}, x_i, x_{i' + 1}, \dots, x_n\} \]    
+     y ahora la suma es \(  O^* >  O \) exactamente por \( x_i - x_{i'} \) y por (1) sabemos que \( x_i - x_{i'} > 0 \). Por lo tanto, es óptimo cambiar la decisión  i-esima tomada por \( O \) por la tomada por \( G \) . Esto se cumple para cualquier índice genérico, por lo tanto, greedy es óptimo.
+    
+    
+\end{itemize}
+
+\end{document}
