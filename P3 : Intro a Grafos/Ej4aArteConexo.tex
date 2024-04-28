@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+Sea $G = (V,E)$ un grafo, con $|V| = n$. \\
+Sea $P(n)$ := Si un grafo tiene más de $\frac{(n-1) \cdot (n-2)}{2}$ aristas $\rightarrow$ es conexo. \\
+
+\textbf{Caso Base}: $P(1) =$ Tenemos $1$ vértice, con $0$ aristas: Se falsea el antecedente, luego $P(1)$ es verdadero. \\
+
+\textbf{Paso inductivo}: \textbf{H.I}: Supongamos que existe un $n_0$ tal que para todo Grafo con $n_0$ vértices que tenga más de $\frac{(n_0 - 1) \cdot (n_0 - 2)}{2}$ aristas $->$ es conexo. \\
+
+\textbf{Q.V.Q}: $P(n_0) -> P(n_0  + 1)$ \\
+
+Tenemos un grafo $G$ con $n_0 + 1$ vértices, queremos probar que si tiene más de $\frac{n_0 \cdot (n_0-1)}{2}$ aristas $->$ es conexo.
+\begin{itemize}
+
+	\item Si tiene menor o igual a la cantidad de aristas pedida, entonces se falsea el antecedente, haciendo verdadera a la propiedad:
+
+    \item Si hay un nodo $v$ de a lo sumo grado $1$, podemos considerar el grafo $G-v$. $G-v$ tiene $n_0$ nodos y $\frac{n_0 \cdot (n_0 -1)}{2}  - 1$ aristas. Observemos que: 
+    $$\frac{n_0 \cdot (n_0 -1)}{2}  - 1 > \frac{(n_0-1) \cdot (n_0-2)}{2}$$ 
+    Luego tenemos un grafo que cumple la H.I., entonces es verdadero $P(n_0 + 1)$.
+    
+    \item ¿Hasta qué grado de nodo podemos remover, tal que siga valiendo la desigualdad de la H.I.? Plantemos la desigualdad. Sea $a$ el grado mayor del nodo que podemos sacar.
+    \begin{align*}
+        &\frac{n_0 \cdot (n_0 -1)}{2}  - a > \frac{(n_0-1) \cdot (n_0-2)}{2} \\
+        &\leftrightarrow \left(\frac{n_0^2}{2} -\frac{n_0}{2} - a\right) > \left(\frac{n_0^2}{2} - \frac{2n_0}{2} - \frac{n_0}{2} + \frac{2}{2}\right) \\
+        &\leftrightarrow -\frac{n_0}{2}  -a > - \frac{3}{2}n_0 + 1 \\
+        &\leftrightarrow n_0 - a > 1 \\
+        &\leftrightarrow n_0 - 1 > a
+    \end{align*}
+   Luego podemos sacar nodos de hasta grado $n_0 - 2$, y generarnos un Grafo de $n_0$ vertices que  cumpla la desigualdad,  haciendo valer la H.I. \\\item ¿Pero qué pasa si todos los nodos tienen grado $n-1$? 
+   ¡Fácil! Si todos los nodos tienen grado $n -1$, entonces el grafo es conexo por definición, ya que es completo (todos están conectados con todos).
+    
+    Luego vimos que $P(n_0 +1)$ vale para todos los casos.
+\end{itemize}
+
+Por lo tanto $P(n)$ vale $\forall n \geq 0$.
+
+
+\end{document}

@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+
+\title{Unicidad Digrafo}
+\author{Daniel Bustos}
+\date{27 de abril de 2024}
+
+\begin{document}
+\maketitle
+
+Sea $G = (E,V)$ un grafo orientado, con cada vértice un grado distinto de salida. Formalmente:
+\[
+\forall v \in V, w \in V, v \neq w \Rightarrow d_{\text{out}}(v) \neq d_{\text{out}}(w)
+\]
+
+Podemos ordenarlos por orden creciente:
+\[
+d_{\text{out}}(v_1) < d_{\text{out}}(v_2) < \ldots < d_{\text{out}}(v_n)
+\]
+
+OBS: Como el grado máximo de salida es $n - 1$ y el mínimo $0$, como todos deben ser distintos, vale que $d_{\text{out}}(v_i) = i - 1$.
+
+Supongamos ahora la existencia de un $G' = (E',V')$, $|V'| = n$ grafo, que cumple las mismas propiedades. Supongamos que NO es isomorfo a $G$.
+\end{document}
