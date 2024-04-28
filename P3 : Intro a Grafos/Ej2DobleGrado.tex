@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{amsmath}
+% Title
+\title{Ejercicio 2: Doble Grafo}
+\author{Daniel Bustos}
+\date{27/4/2024}
+
+\begin{document}
+\maketitle
+Sea $G = (E,V)$ un grafo con $|V| \geq 2$ . Supongamos que todos los vértices tienen distinto grado:
+
+\[
+\forall v \in V, w \in V , v \neq w \rightarrow d(v) \neq d(w)
+\]
+
+Luego podemos ordenar los vértices según su grado de manera creciente. Sea $n = |V|$, esto queda:
+
+\[
+d(v_1) < d(v_2) < d(v_3) < \ldots < d(v_n)
+\]
+
+Dado que no hay aristas duplicadas, tenemos que el grado de $d(v_n)$ es como máximo $n - 1$, luego:
+
+\[
+d(v_1) < d(v_2) < d(v_3) < \ldots < d(v_n) \leq n-1
+\]
+
+\textbf{Observación:} Si $d(v_n) < n-1$, debe haber al menos un repetido, ya que el grado es siempre mayor o igual a 0. Entonces vale que $d(v_n) = n-1$. Luego $v_n$ es un vecino universal (está conectado con todos). \\ \\
+Dado que son todos de distintos grados, con el mayor $n-1$ y el menor $0$, vale que $d_i = i-1$.\\
+
+Por lo tanto, $d(v_1) = 0$ y es un vecino aislado (no tiene conexiones). Pero $v_n$ era un vecino universal. Tenemos un nodo que esta conectado con todos y otro nodo que no esta conectado con ninguno. ¡Absurdo!\\
+
+Por lo tanto, para todo grafo $G$, con mas de un vertice, existen dos vértices distintos con el mismo grado.
+
+\end{document}

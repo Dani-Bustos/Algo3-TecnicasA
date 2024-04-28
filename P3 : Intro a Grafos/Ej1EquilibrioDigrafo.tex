@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Equilibrio Digrafo}
+\author{Daniel Bustos}
+\date{27/4/2024}
+\maketitle
+
+Sea \( D = (E,V) \) un grafo.
+
+Queremos probar que 
+
+\[
+\sum_{v \in V} d_{\text{in}}(v) = \sum_{v \in V} d_{\text{out}}(v) = |E(D)|.
+\]
+
+Probemos por inducción. Sea \( P(n) \) la propiedad anterior con \( n = |E(D)| \).
+
+\textbf{Caso base:} \( |E(D)| = 0 \). Como no hay aristas, vale la propiedad:
+
+\[
+\sum_{v \in V} d_{\text{in}}(v) = \sum_{v \in V} d_{\text{out}}(v) = |E(D)| = 0.
+\]
+
+\bigskip
+
+\textbf{Paso inductivo:} Hipótesis Inductiva (H.I): Vale que si \( |E(D)| \leq n_0 \), entonces vale \( P(n) \).
+
+Si \( |E(D)| = n_0 + 1 \), podemos tomar una arista cualquiera, sacársela y llamemos \( D' \) al grafo resultante. Luego \( |E(D')| = n_0 \). Por lo tanto, vale la H.I: 
+
+\[
+\sum_{v \in V} d_{\text{in}}(v) = \sum_{v \in V} d_{\text{out}}(v) = |E(D')|.
+\]
+
+Observemos que al ser un grafo dirigido, sacar una arista implica restar uno a la suma de los grados de entrada y restar uno a la de salida, luego vale que:
+
+\[
+\sum_{v \in V} d_{\text{in}}(v) + 1 = \sum_{v \in V} d_{\text{out}}(v) + 1 = |E(D')| + 1 = |E(D)|.
+\]
+
+Que era lo que queríamos ver, luego \( P(n) \) vale para todo \( n \geq 0 \).
+
+\end{document}

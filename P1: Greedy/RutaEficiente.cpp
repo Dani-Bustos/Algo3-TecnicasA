@@ -16,8 +16,9 @@ int main(){
     }
     int res = 0; //asumimos que el tanque viene cargado
     int tanque = C;
-    //nos guardamos la autonomia, nos vamos fijando si nos pasamos o no en el rango que tenemos que recorrer ahora
     vector<int> solEstaciones;
+   
+     //nos guardamos la autonomia, nos vamos fijando si nos pasamos o no en el rango que tenemos que recorrer ahora
     fore(i,0,n-1){
         int rango = estaciones[i+1] - estaciones[i];
         if( rango > tanque){
