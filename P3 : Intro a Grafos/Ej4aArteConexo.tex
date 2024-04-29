@@ -1,8 +1,12 @@
 \documentclass{article}
 \usepackage{amsmath}
+% Title
+\author{Daniel Bustos}
+\title{Ejercicio 4: Arte Conexo}
 
 \begin{document}
 
+\subsection{a)}
 Sea $G = (V,E)$ un grafo, con $|V| = n$. \\
 Sea $P(n)$ := Si un grafo tiene más de $\frac{(n-1) \cdot (n-2)}{2}$ aristas $\rightarrow$ es conexo. \\
 
@@ -29,13 +33,54 @@ Tenemos un grafo $G$ con $n_0 + 1$ vértices, queremos probar que si tiene más 
         &\leftrightarrow n_0 - a > 1 \\
         &\leftrightarrow n_0 - 1 > a
     \end{align*}
-   Luego podemos sacar nodos de hasta grado $n_0 - 2$, y generarnos un Grafo de $n_0$ vertices que  cumpla la desigualdad,  haciendo valer la H.I. \\\item ¿Pero qué pasa si todos los nodos tienen grado $n-1$? 
+   Luego podemos sacar nodos de hasta grado $n_0 - 2$, y generarnos un Grafo de $n_0$ vertices que  cumpla la desigualdad,  haciendo valer la H.I. \item ¿Pero qué pasa si todos los nodos tienen grado $n-1$? 
    ¡Fácil! Si todos los nodos tienen grado $n -1$, entonces el grafo es conexo por definición, ya que es completo (todos están conectados con todos).
-    
-    Luego vimos que $P(n_0 +1)$ vale para todos los casos.
-\end{itemize}
+\end{itemize}    
 
+Luego vimos que $P(n_0 +1)$ vale para todos los casos. 
 Por lo tanto $P(n)$ vale $\forall n \geq 0$.
+
+\newpage
+
+
+
+\subsection{b)}
+
+
+Sea $G = (V,E)$ un grafo $(|V| = n)$ tal que: $|E| \geq 2 + \frac{(n-1)(n-2)}{2}$ aristas. Queremos ver que si tiene esa cantidad de aristas entonces es biconexo.
+
+Sabemos por el inciso (a) que $\forall G'$ si $|E'| > \frac{(n-1)(n-2)}{2}  \rightarrow G'$ es conexo.
+
+\textbf{Q.V.Q}: $G$ es biconexo.
+
+Supongamos que $G$ no es biconexo $\rightarrow \exists v \in V$ tal que $v$ es articulación  $(G-v$ tiene mas partes conexas que $G)$.
+
+Por la propiedad de (a) sabemos que necesariamente $G$ es conexo ya que:
+
+\[ |E| \geq 2 + \frac{(n-1)(n-2)}{2} > \frac{(n-1)(n-2)}{2} \]
+
+Luego se debe cumplir que $G - v$ tiene al menos dos partes conexas o lo que es lo mismo, $G$ no puede ser conexo.
+
+¿Qué grado debe tener $v$ para realizar esto? Sabemos que el grafo $G-v$ tiene $n - 1$ vertices , luego debe cumplir que:
+
+\[ |E(G-v)| \leq \frac{(n-2)(n-3)}{2} \]
+Ya que de otra forma seria conexo por la propiedad (a).
+
+Veamos ahora si esto es en efecto posible:
+
+\[ |E(G-v)| = |E| - d(v) \geq 2 + \frac{(n-1)(n-2)}{2} - d(v)  \leq (Q.V.Q) \frac{(n-2)(n-3)}{2} \]
+\[ \leftrightarrow 2 + \frac{(n-1)(n-2)}{2} - d(v)  \leq \frac{(n-2)(n-3)}{2}  \]
+\[ \leftrightarrow 2 + \frac{n^2}{2} - n - \frac{n}{2} + 1 -d(v) \leq \frac{n^2}{2} - \frac{3n}{2} - n + 3 \]
+\[ \leftrightarrow 3 - \frac{3n}{2}  - d(v) \leq -\frac{5n}{2} + 3 \]
+\[ \leftrightarrow 3 + n - d(v) \leq 3 \]
+\[ \leftrightarrow n \leq d(v) \text{ ABS!!!} \]
+
+Ya que el grado de un nodo tiene como cota superior $n-1$, llegamos a un absurdo. Luego $v$ no puede existir, es decir $G$ no tiene articulación.
+
+Por lo tanto, $G$ es biconexo, probando lo que queríamos demostrar.
+
+
+
 
 
 \end{document}
