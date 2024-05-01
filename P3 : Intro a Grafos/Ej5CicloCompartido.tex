@@ -2,8 +2,9 @@
 \usepackage{amsmath}
 \usepackage{tikz}
 
-\begin{document}
 
+\begin{document}
+\section{Ciclo Compartido}
 Sea $G = (E,V)$ un grafo, con $P$ y $Q$ dos caminos distintos que nos llevan de $v$ a $w$. Los notamos:
 \[ P = v_0, \ldots, v_p \quad \text{y} \quad Q = w_0, \ldots, w_q \quad \text{con} \quad v_0 = w_0 = v \quad \text{y} \quad v_p = w_q = w \]
 
@@ -14,13 +15,13 @@ Observemos:
     \begin{center}
     \begin{tikzpicture}
       \node[circle,draw] (1) at (0,0) {1};
-      \node[circle,draw] (2) at (2,0) {2};
-      \node[circle,draw] (3) at (4,0) {3};
-      \node[circle,draw] (4) at (6,0) {4};
-      \node[circle,draw] (5) at (0,-2) {5};
-      \node[circle,draw] (6) at (2,-2) {6};
-      \node[circle,draw] (7) at (4,-2) {7};
-      \node[circle,draw] (8) at (6,-2) {8};
+      \node[circle,draw,red] (2) at (2,0) {2};
+      \node[circle,draw,red] (3) at (4,0) {3};
+      \node[circle,draw,] (4) at (6,0) {4};
+      \node[circle,draw,blue] (5) at (0,-2) {5};
+      \node[circle,draw,blue] (6) at (2,-2) {6};
+      \node[circle,draw,blue] (7) at (4,-2) {7};
+      \node[circle,draw,blue] (8) at (6,-2) {8};
       \draw (1) -- (2);
       \draw (2) -- (3);
       \draw (3) -- (4);
@@ -31,7 +32,7 @@ Observemos:
       \draw (4) -- (8);
     \end{tikzpicture}
     \end{center}
-    Aquí, $P = 1,2,3,4$ y $Q = 1,5,6,4$.
+    Aquí, $ P = 1,2,3,4$ y $Q = 1,2,5,6,7,8,4$.
     
     \item Si $P$ y $Q$ comparten algún vértice intermedio, tenemos dos casos:
     \begin{enumerate}
