@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm} % For theorems and proofs
+\usepackage{tikz}
+
+\author{Daniel Bustos}
+\title{Unicidad Digrafos}
+\date{30/04/2024}
+\begin{document}
+
+\maketitle
+
+
+Sean $G_2 = K_2$ y $G_{n+1} = \overline{G_n \cup K_1}$ para todo $n \geq 2$. Queremos demostrar que $G_n$ tiene un único par de vértices de igual grado. (Denotamos $K_i$ para referirnos al grafo completo de $i$ vértices)
+
+Probémoslo por inducción:\\
+
+Sea $P(n)$ := El grafo $G_n$ como definido anteriormente tiene un único par de vértices de igual grado.\\
+
+\textbf{Caso base $n = 2$:}\\
+
+El completo de dos vértices es de la siguiente forma:
+\begin{tikzpicture}
+  % Vertices
+  \node[circle, draw, fill=black, inner sep=1pt, label=left:$1$] (1) at (0,0) {};
+  \node[circle, draw, fill=black, inner sep=1pt, label=right:$2$] (2) at (2,0) {};
+
+  % Edges
+  \draw (1) -- (2);
+\end{tikzpicture} \\
+
+Solo hay 2 vértices, cada uno con grado 1. Vale $P(2)$.\\
+
+\textbf{Paso inductivo:}
+
+H.I: Existe $n$ tal que el grafo $G_n$ tiene un único par de vértices de igual grado. Mostraremos $P(n) \rightarrow P(n+1)$.
+
+Sabemos por la definición original que:
+\[ G_{n+1} = \overline{G_n \cup K_1} \]
+
+¿Cómo afecta al grado de cada vértice el conjugado? Observemos que para cada vértice $v_i$, con grado $d(v_i)$, al momento de tomar el conjugado el vértice perderá sus conexiones preexistentes y ganará tantas como no tenía antes respecto de los $n$ vértices más  una arista adicional por la conexión con el único vértice de $K_1$. En otras palabras:
+\[ \overline{d(v_i \ U\  K_1)} = n - 1 + 1 - d(v_i) = n - d(v_i) \]
+
+A partir de esta propiedad se observa que dos vértices $w$ y $v$ tienen la misma cantidad de vértices al conjugar si solo si:
+\[ \overline{d(w \ U\  K_1)} = \overline{d(v \ U\  K_1)} \  \leftrightarrow \ n - 1 - d(v) = n - 1 - d(w) \  \leftrightarrow  \ d(w) = d(v) \]
+
+Esto solo puede pasar si $w_i = v_i$ o su grado era el mismo antes del conjugado. Se separa en dos casos:\\
+
+1) Si no hay ningún vértice en $G_n$ que tenga grado 0, por H.I hay solo 2 vértices que tienen el mismo grado y estos mismos serán los únicos que seguirían teniendo mismo grado luego de realizar la operación $\overline{G_n \cup K_1}$ por lo recien visto. \\
+
+2) Si hay un vértice de $G_n$ que tenga grado 0, ya no vale $P(n + 1)$ ya que ,por lo visto anteriormente, el vértice de $K_1$ (de grado 0 originalmente) tendrá grado $n$ luego de conjugar, lo mismo para cualquier otro vértice de grado 0 en $G_n$, además de que tenemos la pareja adicional que nos da la H.I.\\
+
+Veamos ahora por otra inducción que no es posible que haya vértices en $G_n$ con grado 0.\\
+
+Sea $P'(n)$ := No hay vértices de grado 0 en $G_n$ para todo $n \geq 2$.\\
+
+\textbf{Caso base, $n = 2$:}
+
+Para este caso $G_2 = K_2$ y el completo 2 tiene solo dos vértices de grado 1. Luego vale $P'(2)$.\\
+
+\textbf{Paso inductivo:}
+
+H.I: Existe un $n$ tal que vale que no hay vértices de grado 0 en $G_n$. \\ 
+Mostraremos $P'(n) \rightarrow P'(n+1)$.\\
+
+Sabemos que $G_{n+1} = \overline{G_n + K_1}$ y el grado de cada vértice luego de conjugar en esta unión está dado por la fórmula:
+\[ \overline{d(v_i \ U\  K_1)} =  n - d(v_i) \]
+
+Veamos que no puede ser 0 el grado:
+\[ \overline{d(v_i \ U\  K_1)}  = 0 \leftrightarrow n - d(v_i) = 0 \leftrightarrow n = d(v_i) \]
+
+Esto es absurdo ya que los vértices que pertenecían a $G_n$ podían tener grado $n-1$ como máximo, y el unico vértice  perteneciente a $K_1$ tiene siempre grado 0 inicialmente. Luego vale el paso inductivo.
+
+Vimos que vale $P'(n)$ para todo $n \geq 2$. Como esto nos dice que el caso 2 en la demostración de $P(n+1)$ es imposible, vale el paso inductivo de $P(n)$.
+
+Por lo tanto, vale lo que queríamos demostrar originalmente.
+
+\end{document}
