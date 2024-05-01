@@ -40,10 +40,10 @@ Sabemos por la definición original que:
 \[ G_{n+1} = \overline{G_n \cup K_1} \]
 
 ¿Cómo afecta al grado de cada vértice el conjugado? Observemos que para cada vértice $v_i$, con grado $d(v_i)$, al momento de tomar el conjugado el vértice perderá sus conexiones preexistentes y ganará tantas como no tenía antes respecto de los $n$ vértices más  una arista adicional por la conexión con el único vértice de $K_1$. En otras palabras:
-\[ \overline{d(v_i \ U\  K_1)} = n - 1 -d(v_i) + 1 = n - d(v_i) \]
+\[ \overline{d(v_i \ \cup\  K_1)} = n - 1 -d(v_i) + 1 = n - d(v_i) \]
 
 A partir de esta propiedad se observa que dos vértices $w$ y $v$ tienen la misma cantidad de vértices al conjugar si solo si:
-\[ \overline{d(w \ U\  K_1)} = \overline{d(v \ U\  K_1)} \  \leftrightarrow \ n - 1 - d(v) = n - 1 - d(w) \  \leftrightarrow  \ d(w) = d(v) \]
+\[ \overline{d(w \ \cup\  K_1)} = \overline{d(v \ \cup\  K_1)} \  \leftrightarrow \ n - 1 - d(v) = n - 1 - d(w) \  \leftrightarrow  \ d(w) = d(v) \]
 
 Esto solo puede pasar si $w_i = v_i$ o su grado era el mismo antes del conjugado. Se separa en dos casos:\\
 
@@ -64,11 +64,11 @@ Para este caso $G_2 = K_2$ y el completo 2 tiene solo dos vértices de grado 1. 
 H.I: Existe un $n$ tal que vale que no hay vértices de grado 0 en $G_n$. \\ 
 Mostraremos $P'(n) \rightarrow P'(n+1)$.\\
 
-Sabemos que $G_{n+1} = \overline{G_n + K_1}$ y el grado de cada vértice luego de conjugar en esta unión está dado por la fórmula:
-\[ \overline{d(v_i \ U\  K_1)} =  n - d(v_i) \]
+Sabemos que $G_{n+1} = \overline{G_n \cup K_1}$ y el grado de cada vértice luego de conjugar en esta unión está dado por la fórmula:
+\[ \overline{d(v_i \ \cup\  K_1)} =  n - d(v_i) \]
 
 Veamos que no puede ser 0 el grado:
-\[ \overline{d(v_i \ U\  K_1)}  = 0 \leftrightarrow n - d(v_i) = 0 \leftrightarrow n = d(v_i) \]
+\[ \overline{d(v_i \ \cup\  K_1)}  = 0 \leftrightarrow n - d(v_i) = 0 \leftrightarrow n = d(v_i) \]
 
 Esto es absurdo ya que los vértices que pertenecían a $G_n$ podían tener grado $n-1$ como máximo, y el unico vértice  perteneciente a $K_1$ tiene siempre grado 0 inicialmente. Luego vale el paso inductivo.
 
