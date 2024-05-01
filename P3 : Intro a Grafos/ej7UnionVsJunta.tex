@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\begin{document}
+
+\section*{UnionVsJunta}
+
+\subsection*{a)}
+Queremos demostrar que: $G$ es un grafo unión $\leftrightarrow G$ es disconexo.
+Probemos la ida y la vuelta:\\
+
+\textbf{G es un grafo unión $\rightarrow$ G es disconexo:}
+
+Como $G$ es un grafo unión, existe $G_1$ y $G_2$ tales que $G = G_1 \cup G_2$. Por la definición de la operación unión en grafos (poner todos los vértices y aristas de cada uno en un solo grafo , sin unirlos entre sí), no existe ningún camino que conecte vértices de $G_1$ a $G_2$ en $G$. Luego, $G$ tiene dos partes conexas, lo que lo vuelve disconexo.
+
+\textbf{G es disconexo $\rightarrow$ G es un grafo unión:}
+
+Como $G$ es un grafo disconexo, este tiene más de una parte conexa. Sea $n$ la cantidad de partes conexas. Podemos asignarle a cada i-ésima parte conexa como un $G_i$ grafo, hasta cubrir todas las partes. Definamos a $G'$ grafo como $G' = G_2 \cup ... \cup G_n$. Redefinamos a $G$ ahora como $G = G_1 \cup G'$. Se observa que $G$ es claramente un grafo unión. $\qed$
+\subsection*{b)}
+Queremos demostrar que: $G$ es un grafo junta $\leftrightarrow$ $\overline{G}$ es un grafo unión.
+Probemos la ida y la vuelta:
+
+\textbf{G es un grafo junta $\rightarrow$ $\overline{G}$ es un grafo unión:}
+
+Por ser $G$ junta, existen $G_1$ y $G_2$ grafos tal que: 
+\[G = G_1 + G_2\]
+Entonces:
+\[\overline{G} = \overline{G_1 + G_2}\]
+Como la operación $+$ nos conecta todos los vértices de $G_1$ con los de $G_2$, al tomar el complemento, claramente estas dos partes son ahora disconexas, dejándonos a $\overline{G}$ como disconexo. Como probamos en (a), esto nos dice que $\overline{G}$ es un grafo unión.
+
+\textbf{$\overline{G}$ es un grafo unión $\rightarrow$ $G$ es un grafo junta:}
+
+Por ser $\overline{G}$ unión, existen $G_1$ y $G_2$ grafos tal que: 
+\[\overline{G} = G_1 \cup G_2\]
+
+Tomemos ahora el complemento de $\overline{G}$:
+\[\overline{\overline{G}} = G = \overline{G_1 \cup G_2}\]
+
+Ignorando las nuevas conexiones formadas entre $G_1$ y $G_2$, llamemos $G'_1$ y $G'_2$ al grafo resultante de tomar conjugado y restarle las conexiones entre ambos. Luego, ahora vale que:
+\[G = G'_1 + G'_2\]
+
+Luego, $G$ es un grafo junta. $\qed$
+
+\subsection*{c)}
+Queremos demostrar que $G$ es un grafo junta $\leftrightarrow$ $\overline{G}$ es disconexo.
+
+Probemos la ida y la vuelta:\\
+
+\textbf{G es un grafo junta $\rightarrow$ $\overline{G}$ es disconexo:}
+
+Como $G$ es un junta, por el enunciado (b) tenemos que $\overline{G}$ es unión. Luego, por el enunciado (a), $\overline{G}$ es disconexo.
+
+\textbf{$\overline{G}$ es disconexo $\rightarrow$ G es un grafo junta:}
+
+Al ser $\overline{G}$ disconexo, por el enunciado (a), $\overline{G}$ es unión. Luego, por el enunciado (b), $\overline{\overline{G}} = G$ es junta. 
+$\qed$
+
+\end{document}
