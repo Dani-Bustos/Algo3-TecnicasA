@@ -14,6 +14,7 @@ Sea $P(n)$ := $|V| = 2n$ $\land$ $|E| > n^2$ $\rightarrow$ $\exists$ un triángu
 
 Si $n = 1$, entonces hay $2$ vértices, con como máximo $1$ arista entre ellos. Luego se falsea el antecedente y vale $P(1)$.\\
 
+Extra : El primer caso donde vale es n = 2. Con 4 vertices y 5 aristas al menos, es facil imaginarse el triangulo\\
 \textbf{Paso inductivo:}\\
 
 H.I: $\exists n_0$ tal que sea $G = (V,E)$ un grafo, si $|V| = 2n_0$ $\land$ $|E| > n_0^2 \rightarrow \exists$ un triángulo.
@@ -24,7 +25,7 @@ Si el grafo no cumple el antecedente, $P(n_0 + 1)$ vale trivialmente.
 
 Supongamos que lo cumple. Entonces $|V| = 2n_0 + 2$ $\land$ $|E| > (n_0 + 1)^2 = n_0^2 + 2n_0 + 1$.
 
-La idea ahora va a ser sacar dos vértices para poder llegar a nuestra hipótesis inductiva, cumpliendo las condiciones.
+La idea ahora va a ser sacar dos vértices para poder llegar a nuestra hipótesis inductiva, cumpliendo las condiciones que esta nos pid.
 
 Si sacamos dos vértices (Llamémoslos $v$ y $w$), la cantidad de aristas que tendremos será al menos: 
 
@@ -42,7 +43,8 @@ n_0^2 + 2n_0 + 2 - d(v) - d(w) > n_0^2
 \]
 
 Entonces, tenemos que si existen dos nodos que cumplan esta propiedad en nuestro grafo original, entonces vale la H.I, haciendo valer el Paso inductivo.
-
+Veamos ahora el otro caso.
+\newpage 
 Supongamos que para todos dos nodos que agarremos, esta desigualdad no vale. Veamos que en este caso, deben haber dos nodos que compartan un vecino, generando así un triángulo. Formalmente:\\
 
 En un grafo \( G = (V,E) \), con \( |V| = 2n_0 + 2 \) y \( |E| > (n_0 + 1)^2 \)
