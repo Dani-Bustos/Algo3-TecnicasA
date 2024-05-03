@@ -1,14 +1,19 @@
 \documentclass{article}
 \usepackage{amsmath} % for mathematical symbols
 \usepackage{lipsum} % for dummy text
+% Title
+\author{Daniel Bustos}
+\date{3 de mayo de 2024}
+\title{Triangulo Inductivo}
 
 \begin{document}
 
+\maketitle
 Sea $G = (V,E)$ un grafo. Queremos demostrar que si $G$ tiene más de $2n$ vértices con más de $n^2$ aristas, entonces tiene algún triángulo, formalmente tres vértices entre los cuales podemos armar un ciclo simple.\\
 
 Demostremoslo por inducción:\\
 
-Sea $P(n)$ := $|V| = 2n$ $\land$ $|E| > n^2$ $\rightarrow$ $\exists$ un triángulo.\\
+Sea $P(n)$ := $|V| = 2n$ $\land$ $|E| > n^2$ $\rightarrow$ $\exists$ un triángulo en G.\\
 
 \textbf{Caso base $n = 1$:} \\
 
@@ -25,7 +30,7 @@ Si el grafo no cumple el antecedente, $P(n_0 + 1)$ vale trivialmente.
 
 Supongamos que lo cumple. Entonces $|V| = 2n_0 + 2$ $\land$ $|E| > (n_0 + 1)^2 = n_0^2 + 2n_0 + 1$.
 
-La idea ahora va a ser sacar dos vértices para poder llegar a nuestra hipótesis inductiva, cumpliendo las condiciones que esta nos pid.
+La idea ahora va a ser sacar dos vértices para poder llegar a nuestra hipótesis inductiva, cumpliendo las condiciones que esta nos pida.
 
 Si sacamos dos vértices (Llamémoslos $v$ y $w$), la cantidad de aristas que tendremos será al menos: 
 
@@ -43,8 +48,7 @@ n_0^2 + 2n_0 + 2 - d(v) - d(w) > n_0^2
 \]
 
 Entonces, tenemos que si existen dos nodos que cumplan esta propiedad en nuestro grafo original, entonces vale la H.I, haciendo valer el Paso inductivo.
-Veamos ahora el otro caso.
-\newpage 
+Veamos ahora el otro caso.\\ \\
 Supongamos que para todos dos nodos que agarremos, esta desigualdad no vale. Veamos que en este caso, deben haber dos nodos que compartan un vecino, generando así un triángulo. Formalmente:\\
 
 En un grafo \( G = (V,E) \), con \( |V| = 2n_0 + 2 \) y \( |E| > (n_0 + 1)^2 \)
