@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{array}
+%Title
+\title{Representa Grafos}
+\author{Daniel Bustos}
+\begin{document}
+\maketitle
+Estoy suponiendo grafo no orientado. "v" y "u" son vertices dados.  insertar en lista de adyacencia en array dinamico  es O(1) amortizado
+Borrar vertice en lista de adyacencia tiene esa complejidad porquea ademas de copiar todo, tenes que recorrer los vecindarios para borrar el vertice
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Operación} & \textbf{Lista de Aristas} & \textbf{Matriz de Adyacencia} & \textbf{Lista de Adyacencia} \\
+\hline
+Inicializar & $O(m)$ & $O(n^2)$ & $O(n + m)$ \\
+Adyacentes & $O(m)$ & $O(1)$ & $O(d(v))$ \\
+Procesar $N(v)$ & $O(m)$ & $O(d(v))$ & $O(d(v))$ \\
+Insertar vértice $v$ con $N(v)$ & $O(d(v))$ & $O(n^2)$ & $O(n + d(v))$ \\
+Insertar Arista $uv$ & $O(m)$ & $O(1)$ & $O(d(u) + d(v))$ \\
+Remover vértice & $O(m)$ & $O(n^2)$ & $O(n + m)$ \\
+Remover Arista $uv$ & $O(m)$ & $O(1)$ & $O(d(u) + d(v))$ \\
+Mantener Orden en N(v) & $O(??) $ & $O(??)$ & $O(??)$ \\
+\hline
+\end{tabular}
+\caption{Complejidad de operaciones en diferentes representaciones de grafos}
+\end{table}
+
+\end{document}
