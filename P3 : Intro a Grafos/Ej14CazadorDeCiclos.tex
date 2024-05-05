@@ -1,0 +1,40 @@
+	 \documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+
+\begin{document}
+\section*{Cazador de Ciclos}
+\textbf{Daniel Bustos}
+
+\subsection*{a)}
+Queremos probar que : \\
+\textbf{Si todos los vértices de un digrafo D tienen grado de salida mayor a 0 \(\rightarrow\) D tiene un ciclo.}
+
+Supongamos que todos los vértices de un digrafo \(D\) tienen grado de salida mayor a 0.
+Luego podemos tomar un vértice \(v_1\), avanzar hacia otro \(v_2\), de ahí avanzar a \(v_3\) etc.
+En algún momento, como el grafo es finito, debe ocurrir que haya un ciclo. Esto se puede demostrar fácilmente por el absurdo:\\
+\textbf{Supongamos un digrafo \(D\) finito tal que para todo \(v \in V\), \(d(v) > 0\) y D no tenga ciclos.}
+Entonces podemos tomar \(v\) y avanzar hacia \(v'\) con \(v' \neq v\). Como no hay ciclos, pero \(d(v') \neq 0\) necesariamente debemos podemos avanzar hacia \(v''\) con \(v'' \neq v' \neq v\) , y así infinitamente.
+Luego \(D\) tendría infinitos vértices. ¡Absurdo!.
+
+\subsection*{b)}
+Queremos probar que un digrafo \(D\) es acíclico \(\leftrightarrow\) \(D\) es trivial o \(D\) tiene un vértice con \(d_{\text{out}} = 0\) tal que \(D - \{v\}\) es acíclico.\\
+
+Probemos la ida:
+\textbf{\(D\) es acíclico \(\rightarrow\) \(D\) es trivial o \(D\) tiene un vértice con \(d_{\text{out}} = 0\) tal que \(D - \{v\}\) es acíclico.}
+
+Si \(D\) es acíclico, debe tener al menos un vértice \(v\) que tenga grado \(0\), de otra manera sería cíclico por la propiedad de (a). Ahora
+podemos perfectamente remover a \(v\) de \(D\) ya que sacar un vértice de grado \(0\) claramente no genera un ciclo, \(D - \{v\}\) sigue siendo acíclico.\\
+
+Ahora la vuelta
+
+\textbf{\(D\) es trivial o \(D\) tiene un vértice con \(d_{\text{out}} = 0\) tal que \(D - \{v\}\) es acíclico \(\rightarrow\) \(D\) es acíclico.}
+\begin{itemize}
+
+\item Si \(D\) es trivial, es claro que \(D\) es acíclico.
+
+\item Si \(D\) tiene un vértice con \(d_{\text{out}} = 0\) tal que \(D - \{v\}\) es acíclico , podemos simplemente volver a agregar a \(v\). Como \(D - \{v\}\)  era aciclico y \(D - \{v\} \cup \{v\} = D \), y agregar un vertice de grado 0 claramente no nos genera un ciclo nuevo, podemos decir que \(D\) es aciclico 
+\end{itemize}
+$\square$
+\end{document}
