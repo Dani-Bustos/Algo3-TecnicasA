@@ -25,7 +25,7 @@ int betterSolve(vector<int> &a,int k){
     }
     int res = 0;
     //desencolar los k elementos nos cuesta klogk
-    //a este punto podriamos solo iterar la representaicon 
+    //a este punto podriamos solo iterar la representacion 
     // que es un vector en k pasos, pero no cambia la complejidad
     fore(i,0,k){
         res += kMaximos.top();

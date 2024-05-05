@@ -4,9 +4,9 @@ using namespace std;
 
 
 
-//instnacias recursivas de backtracking : Ω(2^n)
+//instancias recursivas de backtracking : Ω(2^n)
 
-//instancais de la funcion : O(n*k) 
+//instancias de la funcion : O(n*k) 
 // entonces si n*k << 2^n hay superposicion de problemas, dp clasica con matriz. acceso en O(1)
 vector<int> monedas;
 const int INF = 1e9; const pair<int,int> INDEF = {INF,INF};
@@ -45,16 +45,22 @@ int main(){
     }
     /*pair<int,int> res = cc(0,k);
     cout << res.first <<" "  << res.second;*/
-    //Enfoque bottom up 
+    
+    //Enfoque bottom up sin optimizacion de memoria
     /*
+    
     MEMO.clear(); MEMO.resize(n+1,vector<pair<int,int>>(k+1,INDEF));
+    //casos base
     fore(i,0,k+1){
         i == 0? MEMO[n][i] = {0,0} : MEMO[n][i] = {INF,INF};
     }
     
     for(int i = n - 1; i >= 0 ;i--){
+        
         for(int j = k;j >= 0;j--){
+             
              pair<int,int> poner;
+             
              j - monedas[i] >= 0 ?  poner = MEMO[i+1][j - monedas[i]] : poner =  {abs(j-monedas[i]),0};
             
              pair<int,int> noPoner = MEMO[i+1][j];
