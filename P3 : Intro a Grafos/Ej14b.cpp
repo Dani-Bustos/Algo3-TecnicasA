@@ -16,9 +16,10 @@ struct graph {
    unordered_set <int> vecindarioDe(int vertice){
         return representacion[vertice];
     }
-   int vertices(){
-    return representacion.size();
-   }
+
+    int cantVertices(){
+        return representacion.size();
+    }
 };
 
 struct digraph{
@@ -33,12 +34,10 @@ struct digraph{
     unordered_set <int> vecindarioDe(int vertice){
         return Salida[vertice];
     }
-    int cantVertices(){
-        return Salida.size();
-    }
 };
-//Basicamente es un DFS, funciona en O(n +m), con esta funcion nos aseguramos de explorar todas las partes conexas
-vector<int> diGraphCycle(digraph & G){
+vector<int> DFS(int actual,vector<bool> & marcas, graph & G,vector<int> &camino);
+
+vector<int> Ciclos(graph &G){
     vector<bool> marcas (G.cantVertices(),false);
     vector<int> camino;
     vector<int> res; res.push_back(-1);
@@ -49,53 +48,51 @@ vector<int> diGraphCycle(digraph & G){
         while(i< G.cantVertices() || marcas[i] == false){
             i++;
         }
-        camino.empty(); // O(1), es un solo elemento si falla
+        camino.clear(); // O(1), es un solo elemento si falla
 
     }
     return res;
 }
 
-vector<int> DFS(int actual,vector<bool> & marcas, digraph & G,vector<int> &camino){
+vector<int> DFS(int actual,vector<bool> & marcas, graph & G,vector<int> &camino){
     camino.push_back(actual);
     if(marcas[actual]){       
         return camino;
-    }else if(G.vecindarioDe(actual).size() == 0){
-        marcas[actual] = true;
-        //por aca no era
+    }else if(marcas[actual]){
+        //por aca no era        
         camino.pop_back();
         return {-1};
     }else{
-        
         marcas[actual] = true;
         for(auto vecino : G.vecindarioDe(actual)){
            vector<int> res;
-           res = DFS(vecino,marcas,G,camino);
-           if(res[0] != -1){
-            return res;
-           }
-           
+           //Como este no es mas digrafo, hay que considerar que un ciclo no es una ida y vuelta
+          if( camino.size() < 1|| camino[camino.size()-2] != vecino){
+            
+            res = DFS(vecino,marcas,G,camino);
+            if(res[0] != -1){
+                return res;
+            }
+          }
         }
-        //Saco este nodo, porque nadie de aca llega a hacer un ciclo
-        //lo planteo asi, porque de otra manera no atajamos el caso en el que el ciclo esta solo en la raiz
         camino.pop_back();
-        return {-1};
+        return {-1};    
     }
 }
 
-
 int main(){
-    int n,m;
-    cin >>n >> m; 
-    digraph G(n);
-    fore(i,0,m){
-        edge a;
-        cin >> a.first >> a.second;
-        G.insertar(a);
-    }
-   
-    auto resultado = diGraphCycle(G);
     
-    for(auto x : resultado){
+    int n,m;
+    cin >> n >> m;
+    graph G(n);
+    fore(i,0,m){
+        edge temp;
+        cin >> temp.first >> temp.second;
+        G.insertar(temp);
+    }
+    auto res = Ciclos(G);
+    for(auto x : res){
         cout << x << " ";
     }
+    
 }
