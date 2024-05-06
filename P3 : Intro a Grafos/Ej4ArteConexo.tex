@@ -6,7 +6,8 @@
 \title{Ejercicio 4: Arte Conexo}
 
 \begin{document}
-
+\section{Arte Conexo}
+\textbf{Daniel Bustos}
 \subsection{a)}
 Sea $G = (V,E)$ un grafo, con $|V| = n$. \\
 Sea $P(n)$ := Si un grafo tiene más de $\frac{(n-1) \cdot (n-2)}{2}$ aristas $\rightarrow$ es conexo. \\
@@ -21,10 +22,14 @@ Tenemos un grafo $G$ con $n_0 + 1$ vértices, queremos probar que si tiene más 
 \begin{itemize}
 
 	\item Si tiene menor o igual a la cantidad de aristas pedida, entonces se falsea el antecedente, haciendo verdadera a la propiedad:
-
-    \item Si hay un nodo $v$ de a lo sumo grado $1$, podemos considerar el grafo $G-v$. $G-v$ tiene $n_0$ nodos y $\frac{n_0 \cdot (n_0 -1)}{2}  - 1$ aristas. Observemos que: 
+	
+	\item \textbf{Observemos} que no puede haber ningun vertice de grado 0 en G. Probemoslo rapidamente por el absurdo: Supongamos $\exists v \in V d(v) = 0$ \\ 
+	Podemos considerar el grafo $G-\{v\}$ que tendra $n_0$ vertices y la misma cantidad de aristas que G, ya que d(v) = 0. Dado que tiene $n_0$ vertices, $G-\{v\}$ podra tener como maximo :$ \binom{n_0}{2} = \frac{(n_0) \cdot (n_0-1)}{2}$ aristas.\\ \\
+	Pero dijimos que $G-\{v\}$ tiene  estrictamente mas de esa cantidad!(Recordemos G  y $G-\{v\}$ tienen la misma cantidad de aristas). Luego no puede existir en G un vertice de grado 0.
+		  
+    \item Si hay un nodo $v$ de  grado $1$, podemos considerar el grafo $G-v$. Este tiene $n_0$ nodos y $\frac{n_0 \cdot (n_0 -1)}{2}  - 1$ aristas. Observemos que: 
     $$\frac{n_0 \cdot (n_0 -1)}{2}  - 1 > \frac{(n_0-1) \cdot (n_0-2)}{2}$$ 
-    Luego tenemos un grafo que cumple la H.I., entonces es verdadero $P(n_0 + 1)$.
+    Luego tenemos un grafo que cumple la H.I por lo tanto es $G-\{v\}$ es conexo . Como $G-\{v\}$ es subgrafo de G y conexo,  dado que el vertice v tiene mas de grado 0, G debe ser conexo tambien.Por lo tanto es verdadero $P(n_0 + 1)$ en este caso.
     
     \item ¿Hasta qué grado de nodo podemos remover, tal que siga valiendo la desigualdad de la H.I.? Plantemos la desigualdad. Sea $a$ el grado mayor del nodo que podemos sacar.
     \begin{align*}
@@ -34,8 +39,9 @@ Tenemos un grafo $G$ con $n_0 + 1$ vértices, queremos probar que si tiene más 
         &\leftrightarrow n_0 - a > 1 \\
         &\leftrightarrow n_0 - 1 > a
     \end{align*}
-   Luego podemos sacar nodos de hasta grado $n_0 - 2$, y generarnos un Grafo de $n_0$ vertices que  cumpla la desigualdad,  haciendo valer la H.I. \item ¿Pero qué pasa si todos los nodos tienen grado $n-1$? 
-   ¡Fácil! Si todos los nodos tienen grado $n -1$, entonces el grafo es conexo por definición, ya que es completo (todos están conectados con todos).
+   Luego podemos sacar nodos de hasta grado $n_0 - 2$, y generarnos un Grafo de $n_0$ vertices que  cumpla la desigualdad, haciendo valer la H.I y por ende demostrando que G es conexo a partir del mismo razonamiento que hicimos antes.
+   \item ¿Pero qué pasa si todos los nodos tienen grado $n_0-1$? 
+   ¡Fácil! Si todos los nodos tienen grado $n_0 -1$, entonces el grafo es conexo por definición, ya que es completo (todos están conectados con todos).
 \end{itemize}    
 
 Luego vimos que $P(n_0 +1)$ vale para todos los casos. 
