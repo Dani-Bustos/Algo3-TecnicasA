@@ -70,7 +70,7 @@ int main(){
     }
     cout << MEMO[0][k].first << " " << MEMO[0][k].second;
     */
-    //Enfoque bottom up memoria 2*k
+    //Enfoque bottom up OPTIMIZACION DE MEMORIA 2*k
     vector<pair<int,int>> prev(k+1,INDEF);
     vector<pair<int,int>> act(k+1,INDEF);
     prev[0] = {0,0}; 
