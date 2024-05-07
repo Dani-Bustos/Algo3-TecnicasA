@@ -52,9 +52,25 @@ begin{center}
   \draw (4) -- (1);
 \end{tikzpicture}
 \end{center}
-En este caso podemos tomar remover algun vértices de afuera
+En este caso podemos tomar remover algun vértices de afuera y como claramente nos sigue quedando un ciclo impar, entonces es bipartito por el teorema anterior.
 		
 \item[red] Ciclo impar sin nada afuera, pero aristas internas extras
+\begin{tikzpicture}
+  \node[circle,draw,red] (1) at (0,0) {1};
+  \node[circle,draw,red] (2) at (2,0) {2};
+  \node[circle,draw,red] (3) at (2,-2) {3};
+  \node[circle,draw,blue] (4) at (0,-2) {4};
+  \node[circle,draw] (5) at (4,0) {5};
+  
+  \draw (1) -- (2);
+  \draw (2) -- (3);
+  \draw (3) -- (4);
+  \draw (4) -- (5);
+  \draw(5) -- (1);
+  \draw[red] (5) --(2);
+  \draw[red] (3)--(1);
+\end{tikzpicture}
+\end{center}
 
 
 \end{itemize}
