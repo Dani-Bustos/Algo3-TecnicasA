@@ -77,16 +77,15 @@ LLamemos INT a los nodos intermedios , supongamos que este camino entre P y Q es
 
 ¿Cuánto mide $C$? Llamemos a \#INT la cantidad de vértices intermedios, que pueden ser 1 o más. Entonces, usando que $|P| = |Q| = n$:
 
-Ya que la longitud de los caminos es la misma. Podes sin perdida de generalidad plantear  que si $w_j$ , esta por delante de la mitad , podemos plantear que en C estan incluidos $wj,w{j+1},w_{j+2},.... w_n$. Analogamente si $w_{j-2}$ esta por detras de la mitad, podemos plantear que en C estan incluidos los vertices $w_{1},w_{2},w_{3},.. w_{j}.$ Es claro que este mismo argumento puede hacerse para $v_i$\\
+Ya que la longitud de los caminos es la misma, podemos sin perdida de generalidad plantear  que si $w_j$ , esta antes de la mitad($w_{n/2}$), decir  que en C estan incluidos $w_j,w_{j+1},w_{j+2},.... w_n$. Analogamente si $w_{j-2}$ esta por detras de la mitad, podemos decir que en C estan incluidos los vertices $w_{1},w_{2},w_{3},.. w_{j}.$ Es claro que este mismo argumento puede hacerse para $v_i$\\
 
-Por lo tanto, como podemos siempre agarrar las mitades mas grandes de P y Q respectivamente, y como $|P| = |Q| = n$ la longitud de C debe ser siempre estrictamente mayor a :\\
-        \[|C| >= n + \#INT \] 
-
-
+Por lo tanto, podemos siempre agarrar las mitades mas grandes de P y Q respectivamente sin importar cuales son los puntos de conexion en cada camino. Llamemos ParteP y ParteQ a las respectivas partes de estos camino incluidas en C. Sabiendo que$|P| = |Q| = n$ la longitud de C debe ser siempre estrictamente mayor a :\\
+        \[|C| =  |ParteP| + |ParteQ| + \#INT  \ge \frac{n}{2}  + \frac{n}{2} + \#INT  = n + \#INT\] 
 
 Entonces $|C| > n = |P| = |Q|$ ya que  $ \#INT > 0$\\
-Observemos que si $\#INT$ es 0, entonces hay este camino es tambien maximo y comparte mas de un vertice con P y Q. Pero planteamos antes que esto no podria ocurrir. Por lo tanto necesariamente $\#INT > 0$\\ \\
-¿Es $C$ simple? Si! P y Q no tienen elementos en común y cualquier elemento intermedio no pertenece a ninguno de los dos, ademas dentro de INT no hay repetidos, ya que dijimos que INT es minimo. Entonces es simple.
+
+Observemos que  $\#INT > 0$, ya que de otro modo C seria tambien camino maximo de longitud n, compartiendo  vertices con P y Q. Pero planteamos antes que esto no podria ocurrir. Por lo tanto necesariamente $\#INT > 0$\\ \\
+¿Es $C$ simple? Si! P y Q no tienen elementos en común y cualquier elemento intermedio no pertenece a ninguno de los dos: Ademas dentro de INT no hay repetidos, ya que dijimos que INT es minimo. Entonces es simple.
 
 Observemos que  construimos un nuevo camino mayor a P y Q simple, pero P y Q eran máximos. ¡Absurdo!
 
