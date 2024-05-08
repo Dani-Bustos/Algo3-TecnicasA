@@ -94,7 +94,7 @@ Sabemos que nuestro grafo tiene $2k + 1$(cantidad impar) de nodos, para algún $
 La cantidad de vértices, tanto en $C1$ y $C2$, son los vértices de la arista que elegimos más los demas vertices del grafo, que esten en cada lado respectivamente. Llamemos $v$ y $w$ a estos dos vértices, luego la cantidad de vértices en $C1$ y $C2$ es:
 \[|V(C1)| = 2 + |C1 - \{v,w\}|, \quad |V(C2)| = 2 + |C2 - \{v,w\}|\]
 
-Por ende debe cumplirse que la cantidad de vértices en nuestro grafo $G$ es:  $ |V(G)| = |V(C2)| + |V(C1)| - 2$.\\
+Por como construimos a C1 y C2 debe cumplirse que la cantidad de vértices en nuestro grafo $G$ es:  $ |V(G)| = |V(C2)| + |V(C1)| - 2$.\\
 \textbf{OBS:}\textit{ debemos restarle 2 , ya que de otra manera estariamos contando los vertices que nos generan nuestra particion de manera repetida}
 
 Como sabemos que $|V(G)|$ es un número impar, necesariamente \textbf{uno y solo uno de nuestros dos ciclos debe tener cantidad impar de vértices}. De otro modo $G$ tendría cantidad par de vértices, y dijimos que $G$ es un ciclo impar con aristas adicionales. Por lo tanto, en este caso de grafo, podemos siempre tomar un vértice de nuestra "partición par" de ciclos, y nos sigue quedando un ciclo impar en $G$, que por el teorema, nos dice que es bipartito.\\
@@ -159,7 +159,7 @@ Luego , podemos tomar cualquier vertice y removerlo. Generandonos las biparticio
 Veamos ahora el otro caso
 \end{center}
 \newpage
-\item \textbf{Si G es bipartito} tenemos nuestras dos biparticiones V1 y V2. Como ningun elemento de V1 o V2 esta relacionado con elementos de su mismo grupo, podemos perfectamente remover cualquier vertice del grafo, y las biparticiones siguen valiendo, ya que removiendo vertices es claro que no apareceran ningunas conexiones nuevas entre ninguno dos vertices, en particular entre ninguno de las biparticiones $\square$.
+\item \textbf{Si G es bipartito} tenemos nuestras dos biparticiones V1 y V2. Como ningun elemento de V1 o V2 esta relacionado con elementos de su mismo grupo, podemos perfectamente remover cualquier vertice del grafo, y las biparticiones siguen valiendo, ya que removiendo vertices es claro que no apareceran ningunas conexiones nuevas entre ninguno dos vertices, en particular entre ninguno de las biparticiones.
 
 \begin{figure}[!ht]
     \centering
@@ -214,7 +214,7 @@ Veamos ahora el otro caso
 \end{figure}
 
 
-
+Habiendo visto que vale en todos los casos, queda probada la vuelta $\square$
 \end{itemize}
 
 
