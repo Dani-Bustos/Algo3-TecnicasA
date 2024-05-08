@@ -164,30 +164,7 @@ Veamos ahora el otro caso
 \begin{figure}[!ht]
     \centering
     \begin{minipage}[b]{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}[node distance=1.5cm, thick]
-        % Nodes in the first part
-        \node[circle, draw] (A1) {};
-        \node[circle, draw, below=of A1] (A2) {};
-        % Nodes in the second part
-        \node[circle, draw, right=of A1] (B1) {};
-        \node[circle, draw, below=of B1] (B2) {};
-        \node[circle, draw, below=of B2] (B3) {};
-        % Encircle the two parts
-        \draw[dashed, rounded corners, red] (A1.north west) rectangle (A2.south east);
-        \draw[dashed, rounded corners, blue] (B1.north west) rectangle (B3.south east);
-        % Edges
-        \draw (A1) -- (B1);
-        \draw (A1) -- (B2);
-        \draw (A2) -- (B1);
-        \draw (A2) -- (B3);
-        \end{tikzpicture}
-        \caption{Grafo con nodo menos}
-        \label{fig:graph1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.45\textwidth}
-        \centering
+         \centering
         \begin{tikzpicture}[node distance=1.5cm, thick]
         % Nodes in the first part
         \node[circle, draw] (A1) {};
@@ -209,6 +186,30 @@ Veamos ahora el otro caso
         \draw (A3) -- (B3);
         \end{tikzpicture}
         \caption{Grafo Bipartito}
+        \label{fig:graph1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[node distance=1.5cm, thick]
+        % Nodes in the first part
+        \node[circle, draw] (A1) {};
+        \node[circle, draw, below=of A1] (A2) {};
+        % Nodes in the second part
+        \node[circle, draw, right=of A1] (B1) {};
+        \node[circle, draw, below=of B1] (B2) {};
+        \node[circle, draw, below=of B2] (B3) {};
+        % Encircle the two parts
+        \draw[dashed, rounded corners, red] (A1.north west) rectangle (A2.south east);
+        \draw[dashed, rounded corners, blue] (B1.north west) rectangle (B3.south east);
+        % Edges
+        \draw (A1) -- (B1);
+        \draw (A1) -- (B2);
+        \draw (A2) -- (B1);
+        \draw (A2) -- (B3);
+        \end{tikzpicture}
+        \caption{Grafo con un nodo menos}
+        \label{fig:graph1}
         \label{fig:graph2}
     \end{minipage}
 \end{figure}
