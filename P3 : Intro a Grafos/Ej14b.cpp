@@ -20,63 +20,112 @@ struct graph {
     int cantVertices(){
         return representacion.size();
     }
+    
+   
+
 };
 
 struct digraph{
     vector<unordered_set<int>> Salida;
+    vector<unordered_set<int>> Entrada;
+    //O(n)
     digraph(int vertices){
         Salida.resize(vertices);
+        Entrada.resize(vertices);
     }
+    //O(1) esperado
     void insertar(edge vw){
         Salida[vw.first].insert(vw.second);
+        Entrada[vw.second].insert(vw.first);
     }
-    
+    //O(1)
+    int cantVertices(){
+        return Salida.size();
+    }
+    //O(1) devuelve un puntero
     unordered_set <int> vecindarioDe(int vertice){
         return Salida[vertice];
     }
-};
-vector<int> DFS(int actual,vector<bool> & marcas, graph & G,vector<int> &camino);
-
-vector<int> Ciclos(graph &G){
-    vector<bool> marcas (G.cantVertices(),false);
-    vector<int> camino;
-    vector<int> res; res.push_back(-1);
-    int i = 0;
-    //Asi exploramos todas las partes conexas
-    while(i < G.cantVertices() && res[0] == -1 ){
-        res = DFS(i,marcas,G,camino);
-        while(i< G.cantVertices() || marcas[i] == false){
-            i++;
+    void InutilizarVertice(int vertice){
+        //Lo borro de todos los vecindarios
+        auto Invecinos = Entrada[vertice];
+        for(auto vecino : Invecinos){
+            Salida[vecino].erase(vertice);
+            Entrada[vertice].erase(vecino);
         }
-        camino.clear(); // O(1), es un solo elemento si falla
 
     }
-    return res;
+};
+bool DFS(int actual,vector<bool> & marcas, digraph & G, stack<int> &camino,vector<int> & descomp);
+vector<int> reconstruyeCiclo(stack<int> &camino){
+    vector<int> ciclo;
+    int cabeza = camino.top();
+    ciclo.push_back(cabeza);
+    camino.pop();
+    while(camino.top() != cabeza){
+            ciclo.push_back(camino.top());
+            camino.pop();
+    } 
+    ciclo.push_back(cabeza);
+    return ciclo;
+    
+}
+pair<vector<int>,bool> Ciclos(digraph &G){
+    vector<bool> marcas (G.cantVertices(),false);
+    stack<int> camino;vector<int> descomp;
+    pair<vector<int>,bool> res; 
+    int i = 0;
+    //Asi exploramos todas las partes conexas
+    while(i < G.cantVertices() && res.second == false ){
+        bool act = DFS(i,marcas,G,camino,descomp);
+        if(act){
+            return {reconstruyeCiclo(camino),true};
+        }
+       // Si el ciclo no esta ,vamos a la siguiente parte conexa
+        while(i< G.cantVertices() && marcas[i] == true){
+            i++;
+        }
+        
+        while(!camino.empty()){
+            camino.pop();
+        }// O(1), es un solo elemento 
+
+    }
+    return {descomp,false};
 }
 
-vector<int> DFS(int actual,vector<bool> & marcas, graph & G,vector<int> &camino){
-    camino.push_back(actual);
-    if(marcas[actual]){       
-        return camino;
-    }else if(marcas[actual]){
-        //por aca no era        
-        camino.pop_back();
-        return {-1};
-    }else{
-        marcas[actual] = true;
-        for(auto vecino : G.vecindarioDe(actual)){
-           vector<int> res;
-           //Como este no es mas digrafo, hay que considerar que un ciclo no es una ida y vuelta
-          if( camino.size() < 1|| camino[camino.size()-2] != vecino){
+//Esta funcion nos dice si hay o no un ciclo,a la vez que nos genera la descomposicion / o el camino potencial
+
+bool DFS(int actual,vector<bool> & marcas, digraph & G,stack<int> &camino,vector<int> &descomp){
+    camino.push(actual);
+    if(marcas[actual] == true){
+        
+        return true;
+    }
+    marcas[actual] = true;
+    if(G.vecindarioDe(actual).size() == 0){
+        camino.pop();
+        G.InutilizarVertice(actual);
+        descomp.push_back(actual);
+        return false;
+    
+    }else {
+        bool res;
+        auto vecindario = G.vecindarioDe(actual);
+        for(auto vecino : vecindario){
+            res = DFS(vecino,marcas, G,camino,descomp);
+            if(res) return true;
             
-            res = DFS(vecino,marcas,G,camino);
-            if(res[0] != -1){
-                return res;
-            }
-          }
+            
         }
-        camino.pop_back();
-        return {-1};    
+        //Si borramos a todos nuestros hijos, tenemos que sacarnos a nosotros
+        if(G.vecindarioDe(actual).size() == 0){
+            camino.pop();
+            G.InutilizarVertice(actual);
+            descomp.push_back(actual);
+        }
+        
+        return false;
     }
 }
 
@@ -84,15 +133,17 @@ int main(){
     
     int n,m;
     cin >> n >> m;
-    graph G(n);
+    digraph G(n);
     fore(i,0,m){
         edge temp;
         cin >> temp.first >> temp.second;
         G.insertar(temp);
     }
     auto res = Ciclos(G);
-    for(auto x : res){
+    string ans = res.second? "true hay ciclo" : "false, no hay ciclo";
+    cout << ans << "\n";
+    for(auto x : res.first){
         cout << x << " ";
     }
-    
+    return 0;
 }

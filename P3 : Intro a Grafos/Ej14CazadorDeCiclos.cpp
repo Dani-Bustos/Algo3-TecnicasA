@@ -3,6 +3,7 @@ using namespace std;
 #define fore(i,a,b) for(int i = a; i< b; i++)
 
 typedef pair<int,int> edge;
+
 struct graph {
    vector<unordered_set<int>>  representacion;
    graph(int v){
@@ -37,48 +38,48 @@ struct digraph{
         return Salida.size();
     }
 };
-//Basicamente es un DFS, funciona en O(n +m), con esta funcion nos aseguramos de explorar todas las partes conexas
+
+vector<int> DFS(int actual,vector<bool> & marcas, digraph & G,stack<int> &camino);
+vector<int> diGraphCycle(digraph & G);
+
 vector<int> diGraphCycle(digraph & G){
     vector<bool> marcas (G.cantVertices(),false);
-    vector<int> camino;
-    vector<int> res; res.push_back(-1);
-    int i = 0;
-    //Asi exploramos todas las partes conexas
-    while(i < G.cantVertices() && res[0] == -1 ){
-        res = DFS(i,marcas,G,camino);
-        while(i< G.cantVertices() || marcas[i] == false){
-            i++;
-        }
-        camino.empty(); // O(1), es un solo elemento si falla
-
-    }
+    stack<int> camino;
+    auto res = DFS(0,marcas,G,camino);
     return res;
 }
 
-vector<int> DFS(int actual,vector<bool> & marcas, digraph & G,vector<int> &camino){
-    camino.push_back(actual);
+vector<int> reconstruyeCiclo(stack<int> &camino){
+    vector<int> ciclo;
+    ciclo.push_back(camino.top());
+    int cabeza = camino.top();
+    camino.pop();
+    while(camino.top() != cabeza){
+            ciclo.push_back(camino.top());
+            camino.pop();
+    } 
+    ciclo.push_back(cabeza);
+    return ciclo;
+    
+}
+
+vector<int> DFS(int actual,vector<bool> & marcas, digraph & G,stack<int> &camino){
+    //Es requiere que el grado de todos sea mayor a 0
+    camino.push(actual);
     if(marcas[actual]){       
-        return camino;
-    }else if(G.vecindarioDe(actual).size() == 0){
-        marcas[actual] = true;
-        //por aca no era
-        camino.pop_back();
-        return {-1};
+        //Para recuperar el camino sin adicional, popeo hasta encontrar el princpio del ciclo
+        return reconstruyeCiclo(camino);
     }else{
         
         marcas[actual] = true;
-        for(auto vecino : G.vecindarioDe(actual)){
-           vector<int> res;
-           res = DFS(vecino,marcas,G,camino);
-           if(res[0] != -1){
-            return res;
-           }
+        //siempre grado mayor a 0 debe habe un ciclo
+        auto vecindario = G.vecindarioDe(actual);
+        auto vecino = *vecindario.begin();
+        return DFS(vecino,marcas,G,camino);
+
            
-        }
-        //Saco este nodo, porque nadie de aca llega a hacer un ciclo
-        //lo planteo asi, porque de otra manera no atajamos el caso en el que el ciclo esta solo en la raiz
-        camino.pop_back();
-        return {-1};
+        
+        
     }
 }
 
@@ -87,6 +88,7 @@ int main(){
     int n,m;
     cin >>n >> m; 
     digraph G(n);
+    //Es requiere que todos tengan grado mayor  a 0
     fore(i,0,m){
         edge a;
         cin >> a.first >> a.second;
