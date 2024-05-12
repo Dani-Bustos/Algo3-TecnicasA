@@ -2,6 +2,8 @@
 \usepackage{amsmath}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
+\usepackage{amssymb}
+
 \title{Ciclo Impar o Bipartito}
 \author{Daniel Bustos}
 \date{11 de mayo 2024}
@@ -56,13 +58,13 @@ Dado que $T$ es un árbol DFS, todos los vértices que estén en $G$ pero no en 
 
 \begin{center}
 
-\begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.8cm}]
+\begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.6cm}]
     \node (A) at (0,0) {};
-    \node (B) at (-1,-1) {v};
+    \node (B) at (-1,-1) {$v$};
     \node (C) at (1,-1) {};
     \node (D) at (-1.5,-2) {};
     \node (E) at (-0.5,-2) {};
-    \node (F) at (0.5,-3) {w};
+    \node (F) at (0.5,-3) {$w$};
     \node (G) at (-1.5,-3) {};
     
     \foreach \from/\to in {A/B, A/C, B/D, B/E, E/F, E/G}
@@ -89,17 +91,17 @@ Probemos la ida y la vuelta :\\
 Sabemos por el item (a) que $vw$ no esta en ningun ciclo, lo cual satisface la 2da condicion, ya que si hubiese aristas que uniesen desdendientes de $w$ ( o a $w$) con un ancestro de $v$ (o con $v$) distintas a $vw$, podriamos formar un ciclo. \\
 Dado que $vw$ es puente, sabemos que remover esta arista necesariamente debe generarnos mas partes conexas. Pensemos en los distintos casos de las posibles diferencias de alturas entre ambos:
 
-\item si altura(v) = altura(w) entonces sacar la arista no nos generia mas partes conexas, ya que siempre podemos recorrer el arbol hacia arriba para llegar de v a w. Luego sus alturas no pueden  coincidir:
+\item[$\star$] si altura(v) = altura(w) entonces sacar la arista no nos generia mas partes conexas, ya que siempre podemos recorrer el arbol hacia arriba para llegar de v a w. Luego sus alturas no pueden  coincidir:
 \begin{figure}[h]
 \begin{center}
 \begin{tikzpicture}[level distance=1.5cm,
                     level 1/.style={sibling distance=3cm},
                     level 2/.style={sibling distance=1.5cm}]
   \node[circle,draw] (root) {}
-    child {node[circle,draw] (a) {v} 
+    child {node[circle,draw] (a) {$v$} 
       child {node[circle,draw] (b) {}}
       child {node[circle,draw] (c) {}}}
-    child {node[circle,draw] (d) {w}};
+    child {node[circle,draw] (d) {$w$}};
 
   % Cross edge
   \draw[dotted,line width = 1.5pt] (a) -- (d);
@@ -108,7 +110,7 @@ Dado que $vw$ es puente, sabemos que remover esta arista necesariamente debe gen
 \end{center}
 \end{figure}
 
-\item  Como $\text{altura}(v) < \text{altura}(w)$ y sabemos que no se forman ciclos, entonces necesariamente $v$ debe ser el padre de $w$, ya que de otra forma se nos formaría un ciclo, y sabemos que esto no puede ocurrir porque $vw$ es una arista puente, demostramos asi la ida.
+\item[$\star$]  Como $\text{altura}(v) < \text{altura}(w)$ y sabemos que no se forman ciclos, entonces necesariamente $v$ debe ser el padre de $w$, ya que de otra forma se nos formaría un ciclo, y sabemos que esto no puede ocurrir porque $vw$ es una arista puente, demostramos asi la ida.
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}[level distance=1.5cm,
@@ -120,32 +122,32 @@ Dado que $vw$ es puente, sabemos que remover esta arista necesariamente debe gen
       child {node[circle,draw] {}
         child {node[circle,draw] {}}
         child {node[circle,draw] {}}}
-      child {node[circle,draw](v) {v}
+      child {node[circle,draw](v) {$v$}
         child {node[circle,draw] {}}
-        child {node[circle,draw] (w) {w}}};
+        child {node[circle,draw] (w) {$w$}}};
   \end{scope}
 
   % Second graph
   \begin{scope}[shift={(6,0)}]
     \node[circle,draw] {}
-      child {node[circle,draw] (v2) {v}
+      child {node[circle,draw] (v2) {$v$}
         child {node[circle,draw] {}}
         child {node[circle,draw] {}}}
       child {node[circle,draw] {}
         child {node[circle,draw] {}}
-        child {node[circle,draw] (w2) {w}}};
+        child {node[circle,draw] (w2) {$w$}}};
    
   \draw[dotted,line width = 1.5pt]  (v2) to[bend right=40] (w2);
   \
   \end{scope}
 	\begin{scope}[shift={(3,-4)}]
-    \node[circle,draw] (v3){v}
+    \node[circle,draw] (v3){$v$}
       child {node[circle,draw]  {}
         child {node[circle,draw] {}}
         child {node[circle,draw] {}}}
       child {node[circle,draw] {}
         child {node[circle,draw] {}}
-        child {node[circle,draw] (w3) {w}}};
+        child {node[circle,draw] (w3) {$w$}}};
    
   \draw[dotted,line width = 1.5pt]  (v3) to[bend left=50] (w3);
     
@@ -154,8 +156,7 @@ Dado que $vw$ es puente, sabemos que remover esta arista necesariamente debe gen
 \end{tikzpicture}
 \caption{El unico caso donde no se genera un ciclo, es cuando $v$ es padre de $w$. Notese que un arbol DFS nunca tiene cross edges, lo probamos en (b) . El segundo dibujo es meramente ilustrativo}
 \end{figure}
-
-\item \textbf{$ v$ es el padre de $w$ en $T$ y ninguna arista de $G \setminus \{vw\}$ une a un descendiente de $w$ (o a $w$) con un ancestro de $v$ (o con $v$) $\rightarrow vw$ es puente }
+\item \textbf{$ v$ es el padre de $w$ en $T$ y ninguna arista de $G \setminus \{vw\}$ une a un descendiente de $w$ (o a $w$) con un ancestro de $v$ (o con $v$) $\rightarrow vw$ es puente }\\
  Es facil ver que en este caso vw es arista puente, ya que no hay ninguna otra manera de acceder a w o los nodos que estan por debajo suyo, desde v o algun ancestro suyo, a menos que sea a traves de $vw$ . Luego si removiesemos esta arista, tendriamos mas partes conexas que con las que empezamos. Por lo tanto $vw$ es una arista puente.
 \end{itemize}
 
