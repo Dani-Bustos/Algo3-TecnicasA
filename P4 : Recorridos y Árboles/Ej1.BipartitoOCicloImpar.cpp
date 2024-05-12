@@ -7,7 +7,7 @@ vector<int> reconstruyeCiclo(vector<int> &padres,int comienzo,int final){
     //Complejidad: O(n), en el peor caso todos los vertices son el ciclo
     vector<int> ciclo;
     ciclo.push_back(final);
-    //Itero por los pares, hasta encontrar el final del ciclo
+    //Itero por los padres, hasta encontrar el final del ciclo
     for( int v = comienzo; v!= final;v = padres[v]) ciclo.push_back(v);
     ciclo.push_back(final);
     return ciclo;
@@ -15,8 +15,8 @@ vector<int> reconstruyeCiclo(vector<int> &padres,int comienzo,int final){
     
 }
 
-//Complejidad : O(n + m) es una dfs con color
-//Generalizar este codigo es facil, solo hay que poner un while mas arriba que explore todas las partes conexas
+//Complejidad : O(n + m) es una dfs con coloreo
+
 vector<int> BipartitoOCicloImpar(graph &G){
     int RED = 0; int BLUE = 1; int SIN_PINTAR = -1;
 
@@ -29,6 +29,7 @@ vector<int> BipartitoOCicloImpar(graph &G){
     
     int LastColor = RED;
     int raiz = 0;
+    //Iteramos por todas las partes conexas
     while(raiz < G.cantVertices()){
         AProcesar.push(raiz);
         padres[raiz] = raiz;
@@ -37,8 +38,8 @@ vector<int> BipartitoOCicloImpar(graph &G){
             AProcesar.pop();
             if(marcas[actual] != SIN_PINTAR) continue;
             
-              
-            //Pinto de acorde a la distancia, si mi anterior era rojo yo soy azul, y viceversa
+            
+            //Pinto de acorde a la distancia, si mi padre era rojo yo soy azul, y viceversa
             LastColor = marcas[padres[actual]]  == RED ? BLUE : RED;
             marcas[actual] = LastColor;
         
@@ -48,16 +49,15 @@ vector<int> BipartitoOCicloImpar(graph &G){
                     padres[vecino] = actual;
                     AProcesar.push(vecino);
                 
-                //Hay un ciclo con nodos de mi mismo color
                 }else if(marcas[actual] == marcas[vecino]){
-                
-                    
-                    return reconstruyeCiclo(padres,actual,vecino); //Recuperar el ciclo, no es bipartito
+                    //Hay un ciclo con nodos de mi mismo color
+                    //Recupera el ciclo , no es bipartito
+                    return reconstruyeCiclo(padres,actual,vecino); 
                 }   
             }
         
         }
-    //Termine con esta parte conexa, vamos a la siguiente
+        //Termine con esta parte conexa, vamos a la siguiente
         while( marcas[raiz] != SIN_PINTAR && raiz < G.cantVertices()) raiz++;
     }
     return marcas;
