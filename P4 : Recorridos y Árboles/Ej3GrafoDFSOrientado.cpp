@@ -23,7 +23,7 @@ digraph OrientacionConexa(graph & G){
         } 
         
         marcas[valor(actual)] = true;
-        
+        //Es una treedge normal, añadila a la orientacion como especifcado en D(T)
         if(valor(actual) != padre(actual)) Orientacion.insertar({padre(actual),valor(actual)});
 
         for(int vecino : G.vecindarioDe(valor(actual))){
@@ -52,4 +52,8 @@ int main(){
     for(auto x : res.DarListaDeAristas()){
         cout << x.first << " " << x.second << "\n";
     }
+    //RECOMIENDO fuertemente usar la pagina https://csacademy.com/app/graph_editor
+    //Para poder visualizar el grafo orientado final. Copiar la lista de aristas y pegarla ahi
+    //No se olviden de elegir 0-index y directed en la pagina
+
 }
