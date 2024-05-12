@@ -3,18 +3,15 @@
 using namespace std;
 #define fore(i,a,b) for(int i = a; i< b; i++)
 
-vector<int> reconstruyeCiclo(stack<int> &camino){
+vector<int> reconstruyeCiclo(vector<int> &padres,int comienzo,int final){
     //Complejidad: O(n), en el peor caso todos los vertices son el ciclo
     vector<int> ciclo;
-    ciclo.push_back(camino.top());
-    int cabeza = camino.top();
-    camino.pop();
-    while(camino.top() != cabeza){
-            ciclo.push_back(camino.top());
-            camino.pop();
-    } 
-    ciclo.push_back(cabeza);
+    ciclo.push_back(final);
+    //Itero por los pares, hasta encontrar el final del ciclo
+    for( int v = comienzo; v!= final;v = padres[v]) ciclo.push_back(v);
+    ciclo.push_back(final);
     return ciclo;
+
     
 }
 
@@ -24,33 +21,38 @@ vector<int> BipartitoOCicloImpar(graph &G){
     int RED = 0; int BLUE = 1; int SIN_PINTAR = -1;
 
     stack<int> AProcesar;
-    //Lo necesito para recuperar al ciclo impar si lo hubiese
-    stack<int> Visitados;
+    
     //Las marcas me generan mi biparticion
     vector<int> marcas (G.cantVertices(),SIN_PINTAR);
+    //Lo necesito para recuperar al ciclo impar si lo hubiese
+    vector<int> padres(G.cantVertices(),-1);
+    
     int LastColor = RED;
     int raiz = 0;
     while(raiz < G.cantVertices()){
         AProcesar.push(raiz);
+        padres[raiz] = raiz;
         while(not AProcesar.empty()){
             int actual = AProcesar.top(); 
             AProcesar.pop();
             if(marcas[actual] != SIN_PINTAR) continue;
             
-            Visitados.push(actual);  
+              
             //Pinto de acorde a la distancia, si mi anterior era rojo yo soy azul, y viceversa
-            LastColor = LastColor  == RED ? BLUE : RED;
+            LastColor = marcas[padres[actual]]  == RED ? BLUE : RED;
             marcas[actual] = LastColor;
         
         
             for(auto vecino : G.vecindarioDe(actual)){
                 if(marcas[vecino] == SIN_PINTAR){
+                    padres[vecino] = actual;
                     AProcesar.push(vecino);
+                
                 //Hay un ciclo con nodos de mi mismo color
                 }else if(marcas[actual] == marcas[vecino]){
-               
-                    Visitados.push(vecino);
-                    return reconstruyeCiclo(Visitados); //Recuperar el ciclo, no es bipartito
+                
+                    
+                    return reconstruyeCiclo(padres,actual,vecino); //Recuperar el ciclo, no es bipartito
                 }   
             }
         
