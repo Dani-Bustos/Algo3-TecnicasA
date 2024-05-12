@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Arbol Orientado}
+\author{Daniel Bustos}
+\date{12 de mayo 2024}
+\maketitle
+
+Generemos un ciclo de implicaciones, para mostrar que todas son equivalentes
+
+\begin{enumerate}
+    \item[I)] $G$ admite una orientación que es fuertemente conexa.
+    \item[II)] $G$ no tiene puentes.
+    \item[III)] Para todo árbol DFS de $T$, ocurre que $D(T)$ es fuertemente conexo.
+    \item[IV)] Existe un árbol DFS de $T$ tal que $D(T)$ es fuertemente conexo.
+\end{enumerate}
+
+\subsection*{I $\rightarrow$ II}
+
+\textbf{$G$ admite una orientación que es fuertemente conexa $\rightarrow$ $G$ no tiene puentes.}\\
+
+Recordemos que si la orientación es fuertemente conexa, quiere decir que para todo par de vértices $v,u$ existe un camino que va de $v$ a $u$ y viceversa. Como en el grafo orientado no hay ciclos de "tamaño uno" (una ida y una vuelta del mismo par de nodos), se sigue que para todo par de vértices podemos formar un ciclo resultante de la unión entre los dos caminos previamente mencionados. Por lo tanto, para cualquier arista que saquemos, esta necesariamente será parte de un ciclo. Luego, no hay aristas puente por la propiedad demostrada en el ejercicio (2a).
+
+\subsection*{II $\rightarrow$ III}
+
+\textbf{$G$ no tiene puentes $\rightarrow$ Para todo árbol DFS de $T$, ocurre que $D(T)$ es fuertemente conexo.}
+
+Usemos inducción en el nivel del árbol para mostrar que esto vale. Claramente, desde la raíz se puede alcanzar a todos los nodos en D(T). Si vemos que vale la vuelta de esta propiedad con la inducción, quiere decir que el grafo es fuertemente conexo.\\
+
+\textbf{P(n):} $\forall v \in D(T)$ con nivel $n$ en $T$, pueden alcanzar la raíz.
+
+\textbf{Caso Base:} $P(0)$ vale ya que es claro que la raíz se alcanza a sí misma.
+
+\textbf{Paso Inductivo:}
+
+\textbf{H.I:} $\exists n_0$ tal que $\forall n' \leq n_0$ vale $P(n')$.
+
+\textbf{Q.V.Q} $P(n_0) \rightarrow P(n_0 + 1)$.
+
+Vamos a usar la propiedad que demostramos en (2c). Dado que $G$ no tiene puentes, sabemos que para toda arista $vw$, con $v$ nivel menor o igual a $w$ en $T$:\\
+
+\textbf{$vw$ no es puente $\Leftrightarrow vw$ no es padre en $T$ o alguna arista $G\setminus vw$ une a un descendiente de $w$ (o $w$) con un ancestro de $v$ (o $v$).}\\
+
+Todas los vértices de nivel $n_0 + 1$ tienen un padre de nivel $n_0$. Llamemos $v_{n}$ y $w_{n+1}$ a un vértice de nivel $n$ cualquiera con su hijo de nivel $n + 1$. Como sabemos que todas las aristas del árbol no son puentes en G (en particular la arista $v_{n} w_{n+1}$), se debe cumplir alguna de las dos condiciones estipuladas en la propiedad.\\
+ Como vale que $v_{n} w_{n+1}$ son padre e hijo , entonces debe existir alguna arista distinta que una a algún descendiente de $w_{n+1}$ (o a él mismo) con un ancestro de $v_{n}$ (o a $v_{n}$ mismo) . Por lo tanto, como esta conexión existe siempre y sabemos por H.I que todo vértice de grado menor o igual a $n_0$ alcanza a la raíz, entonces $w_{n+1}$ alcanza también a la raíz. Esto vale para  cualquier nodo de nivel $n_0 + 1$, lo cual prueba lo que queríamos ver.
+
+\subsection*{III $\rightarrow$ IV}
+ \textbf{Para todo árbol DFS de $T$, ocurre que $D(T)$ es fuertemente conexo. $\rightarrow$ Existe un árbol DFS de $T$ tal que $D(T)$ es fuertemente conexo.}
+ Trivial, ya que todas son fuertemente conexos, existe alguno que lo es.
+\subsection*{IV $\rightarrow$ I}
+\textbf{Existe un árbol DFS de $T$ tal que $D(T)$ es fuertemente conexo. $\rightarrow$ $G$ admite una orientación que es fuertemente conexa.}
+Trivial tambien, dado que D(T) nos define una orientacion y esta es fuertemente conexa.\\
+
+Queda demostrada la igualdad de las 4 declaraciones
+\end{document}
