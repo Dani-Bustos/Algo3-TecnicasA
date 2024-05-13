@@ -34,7 +34,8 @@ vector<edge> AristasPuente(graph & G){
         
         for(int vecino : G.vecindarioDe(actual.first)){
             if(not visitados[vecino]){
-               
+                //Por el funcionamiento de dfs, si esta hoja tiene un padre mas profundo, entonces la va
+                //A encontrar mas tarde y va a sobreescribi esta asignacion
                 AProcesar.push({vecino,actual.second + 1});
                 leaf nuevaHoja(actual.first,actual.second + 1,INF);
                 DFSTree[vecino] = nuevaHoja;

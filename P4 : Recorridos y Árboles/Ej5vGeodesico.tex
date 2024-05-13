@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+Un árbol generador $T$ de un grafo $G$ es $v$-geodésico si la distancia entre $v$ y $w$ en $T$ es igual a la distancia entre $v$ y $w$ en $G$ para todo $w \in V(G)$. Demostrar que todo árbol BFS de $G$ enraizado en $v$ es $v$-geodésico.
+
+Probémoslo: Si $T$ es un árbol BFS de $G$ enraizado en $v \rightarrow T$ es $v$-geodésico.
+
+Hagamos inducción en las distancias a la raíz $v$. Vamos a usar (pero no demostrar) el siguiente lema:
+
+\textbf{Lema:} Sea $T$ un árbol BFS desde raíz de un (di)grafo $G$. Si el nivel de $v$ es menor al nivel de $w$ en $T$, entonces $v$ se procesó antes que $w$ por BFS.
+
+Ahora si empecemos la inducción:
+
+$P(n)$ := Para todo nodo a distancia $n$ de la raíz $v$ en $T$, su distancia en $G$ es igual a su distancia en $T$: $d_T(v,v') = n \rightarrow d_G(v,v') = n$.
+
+\textbf{Caso base:} $P(0)$, vale trivialmente, ya que la distancia en BFS a la raíz es $0$, ya que es el primer nodo en ser procesado.
+
+\textbf{Paso Inductivo:}
+\textbf{H.I.} : $\exists n_0 \in \mathbb{N}$ tal que $\forall n' \leq n_0$ vale $P(n')$.
+\textbf{Q.V.Q.} $P(n_0) \rightarrow P(n_0 + 1)$.
+
+Consideremos el camino $P = v,v_1,v_2,\ldots,v_{n+1}$. Sabemos por H.I. que el nodo $v_n$ está en el nivel $n$ del árbol BFS, cuando BFS mira este vértice, toma a todos sus vecinos, dentro de los cuales debe estar $v_{n+1}$.
+
+\end{document}
