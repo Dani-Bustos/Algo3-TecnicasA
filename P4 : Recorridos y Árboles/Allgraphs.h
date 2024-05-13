@@ -3,12 +3,37 @@ using namespace std;
 
 //Biblioteca de funcionalidades basicas para representar Grafos y Digrafos
 //AUTOR : DANIEL BUSTOS
+
+//Lo necesito para los pesos
+struct hash_pair {
+    template <class T1, class T2>
+    size_t operator()(const pair<T1, T2>& p) const
+    {
+        auto hash1 = hash<T1>{}(p.first);
+        auto hash2 = hash<T2>{}(p.second);
+ 
+        if (hash1 != hash2) {
+            return hash1 ^ hash2;              
+        }
+         
+        // If hash1 == hash2, their XOR is zero.
+          return hash1;
+    }
+};
+
+
+
+
 typedef pair<int,int> edge;
 struct graph {
+   bool weighted;
+   unordered_map<pair<int,int>,int,hash_pair> pesos;
    vector<unordered_set<int>>  representacion;
    //O(n)
-   graph(int v){
+   graph(int v,bool pesos = false){
     representacion.resize(v);
+    weighted = pesos; 
+
    } 
    //O(1) esperado
    void insertar(edge vw){
