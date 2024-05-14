@@ -25,8 +25,10 @@ void BFS( weighted_graph & G){
         v = aProcesar.front().first.vertice; lvl = aProcesar.front().first.frontera; 
         p = aProcesar.front().second;
         aProcesar.pop();
+        
         if( bfsTree[v].first.vertice == SIN_DEFINIR){
-
+            verticeFrontera temp(p,lvl);
+            bfsTree[v] = {temp,G.pesoDe({v,p})};
         }
 
 
