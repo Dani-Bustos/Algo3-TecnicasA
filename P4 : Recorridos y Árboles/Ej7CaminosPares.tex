@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\begin{document}
+\section{Daniel Bustos, Camino Par en Digrafo de paridades}
+\textit{a) Sea $H$ el digrafo bipartito que tiene dos vértices $v^0, v^1$ por cada vértice $v \in V(G)$. Donde $v^0$ es adyacente a $w^1$ (asumimos ida y vuelta en digrafo) en $H \leftrightarrow v$ y $w$ son adyacentes en $G$. (Notar que $\{v^i | v \in V(G)\}$ es un conjunto independiente para $i \in \{0,1\}$).}\\
+
+\textbf{Demostrar que $v_1,...,v_k$ es un recorrido en $G \leftrightarrow v^1_1,v^0_2,...v^{K \mod 2}_k$ es un recorrido en $H$.}
+
+Probemos la ida y la vuelta:\\
+
+\textbf{$P = v_1,...,v_k$ es un recorrido en $G \Rightarrow v^1_1,v^0_2,...v^{K \mod 2}_k$ es un recorrido en $H$.}\\
+
+Dado que tenemos un recorrido en $G$, sabemos que $\forall v_i \in P, v_i$ y $v_{i+1}$ son adyacentes.
+
+Luego, por la regla del Digrafo $H$, sabemos que en este existen las aristas: $v^0_i,v^1_{i+1}$. Por la misma lógica, como $v_{i+1}$ es adyacente a $v_{i+2}$, por la regla del digrafo existe en $H$ la arista: $v^1_{i+1},v^0_{i+2}$ y así sucesivamente.\\
+
+Probémoslo por inducción:
+
+$P(k) := P = v_1,...,v_k$ es un recorrido en $G \Rightarrow v^1_1,v^0_2,...v^{k \mod 2}_k$ es un recorrido en $H$.\\
+
+\textbf{Caso base:}
+$P(1)$ vale claramente, ya que como $v_1$ existe en $G$, existe $v^1_1$ en $H$ y eso ya es todo nuestro recorrido.\\
+
+\textbf{Paso Inductivo:}
+\textit{H.I.} $\exists k_0$ tal que vale: $P = v_1,...,v_{k_0}$ es un recorrido en $G \Rightarrow v^1_1,v^0_2,...v^{k_0 \mod 2}_{k_0}$ es un recorrido en $H$.\\
+
+\textbf{Q.V.Q:} $P(k_0) \Rightarrow P(k_0 + 1)$ \\
+
+Tenemos un camino de tamaño $k_0 + 1$ en $G$. Observemos que por la H.I., existe el recorrido $v^1_1,v^0_2,\ldots,v^{k_0 \mod 2}_{k_0}$. Luego, indistintamente de la paridad $v_{k_0}$, como $v_{k_0}$ es adyacente a $v_{k_0 + 1}$, existe la arista: $v^1_{k_0},v^0_{k_0 + 1}$ y $v^0_{k_0},v^1_{k_0 + 1}$. Por lo tanto, siempre podemos agregar al camino de la H.I. la arista correspondiente a la paridad. Por lo tanto, vale el paso inductivo y $P(k) \ \forall k \in \mathbb{N}$. \\
+
+Ahora, la vuelta:
+
+\textbf{$v^1_1,v^0_2,...v^{K \mod 2}_k$ es un recorrido en $H \Rightarrow v_1,...,v_k$ es un recorrido en $G$ }
+
+Podemos hacer una inducción similar, pero también podemos plantear un absurdo. Supongamos que este recorrido en $G$ no existe, entonces debe existir un $v_i$ ($i < k$) tal que la arista $v_i,v_{i+1}$ no exista. Si esta arista no existe, quiere decir que tampoco están las conexiones: $v^1_i,v^0_{i + 1}$ y $v^0_i,v^1_{i + 1}$, lo cual nos dice que el camino (que suponemos existe) no puede ser un camino, sin importar cuáles de las dos aristas pertenezcan a él. ¡Absurdo!\\
+
+{\textit{b) Sea $G^{=2}$ el digrafo que tiene los mismos vértices de G tal que $v$ es adyacente a $w$ en $G^{=2}$ si
+y solo si existe $z \in G$ tal que $v \rightarrow z \rightarrow w$ es un camino de G. Demostrar que G tiene un
+recorrido de longitud 2k si y solo si G$^{=2}$ tiene un recorrido de longitud k.}} \\
+
+Probemos la ida : 
+\textbf{G tiene un
+recorrido de longitud 2k $\implies$ G$^{=2}$ tiene un recorrido de longitud k.}
+
+Si G tiene un recorrido de longitud 2k, sabemos que para todo $v_i,v_{i+2}(i \le 2k - 2) \exists v_{i+1}$ tal que  $v_i \rightarrow v_{i+1} \rightarrow v_{i+2}$ Luego por definicion de G$^{=2}$  quiere decir que el recorrido 
+$v_i,v_{i+2}.v_{i+4},\dots ,v_{2k}$ existe en G$^{=2}$, y este tiene longitud : $\frac{2k}{2} = k$ 
+
+Ahora la vuelta:
+\textbf{ G$^{=2}$ tiene un recorrido de longitud k $\implies$ G tiene un
+recorrido de longitud 2k } \\
+El razonamiento es igual al anterior, pero "al reves"
+
+
+\end{document}

@@ -31,7 +31,7 @@ $P(n)$ := Para todo nodo a distancia $n$ de la raíz $r$ en $T$, su distancia en
 \item Cuando BFS mira este vértice, toma a todos sus vecinos, dentro de los cuales debe estar $v_{l+1}$, si no fue marcado por BFS, este lo toma y vale $P(l_0 + 1)$. 
 \item Caso contrario quiere decir que el nodo ya fue marcado por BFS , lo que quiere decir que $\exists$ un vertice w con altura $< l_0$ tal que $v_{l_0+1} \in N(w)$. Como w cumple la H.I, quiere decir que $d_T(r,w) = d_G(r,w)$. Luego tenemos ya que $d_G(r,w) < l $ vale lo siguiente :
 
-\[d_G(r,w) + 1 =^{H.I}  d_T(r,w) + 1 (*) \leq l_0 + 1 = d_G(r,v_{l_{0 + 1}} )\]
+\[d_G(r,w) + 1 = d_T(r,w) + 1 (*) \leq l_0 + 1 = d_G(r,v_{l_{0 + 1}} )\]
 Con la distancia $(*)$ representando $d_T(r,v_{l_0 + 1})$ cuando pasa por $w$.
 Ademas siempre vale que la distancia en el arbol T debe ser mayor o igual a la distancia en G, por el funcionamiento de BFS. 
 Entonces se puede deducir lo siguiente: 
