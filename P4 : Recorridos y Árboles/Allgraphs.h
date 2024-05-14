@@ -60,9 +60,8 @@ struct weighted_graph : public graph{
    graph Gsubyacente; 
    unordered_map<pair<int,int>,int,hash_pair> pesos; 
   
-   weighted_graph(int n = 0){
-    graph Gsubyacente(n);
-   }
+   weighted_graph(int n = 1) : Gsubyacente(n){}
+    
    
    void insertar(edge vw,int peso = 1){
     Gsubyacente.insertar(vw);
@@ -76,13 +75,30 @@ struct weighted_graph : public graph{
    }
    
    int pesoDe(edge vw) const{
-     if(pesos.find(vw) != pesos.end()){
+     if (vw.first == vw.second){
+        return 0;
+     }
+     else if(pesos.find(vw) != pesos.end()){
         return pesos.at(vw);
      }else{
         //Capaz que lo guarde al reves, no lo se en princpio
         return pesos.at({vw.second,vw.first});
      }
-   }
+   }   
+    void insertar(edge vw) {
+        Gsubyacente.insertar(vw);
+    }
+
+    unordered_set<int> vecindarioDe(int vertice) const {
+        return Gsubyacente.vecindarioDe(vertice);
+    }
+
+    int cantVertices() const {
+        return Gsubyacente.cantVertices();
+    }
+
+    
+
 };
 
 struct digraph{
@@ -117,10 +133,11 @@ struct digraph{
 
     }
     //O(m), recorre todas las aristas
-    vector<edge> DarListaDeAristas(){
+    vector<edge>  DarListaDeAristas(){
         
         vector<edge> listaAristas;
-        for(int i = 0;i < Salida.size();i++){
+        //Pongo este tipo de dato para evitar warnings del compilador
+        for(long unsigned int  i = 0;i < Salida.size();i++){
             for(auto vecino : Salida[i]){
                 listaAristas.push_back({i,vecino});
             }
