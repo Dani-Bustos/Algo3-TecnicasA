@@ -4,7 +4,7 @@ using namespace std;
 //Biblioteca de funcionalidades basicas para representar Grafos y Digrafos
 //AUTOR : DANIEL BUSTOS
 
-//Lo necesito para los pesos
+//Lo necesito para los pesos, implementa hasheo de pares
 struct hash_pair {
     template <class T1, class T2>
     size_t operator()(const pair<T1, T2>& p) const
@@ -16,23 +16,22 @@ struct hash_pair {
             return hash1 ^ hash2;              
         }
          
-        // If hash1 == hash2, their XOR is zero.
+        
           return hash1;
     }
 };
 
 
-
-
 typedef pair<int,int> edge;
+
 struct graph {
-   bool weighted;
-   unordered_map<pair<int,int>,int,hash_pair> pesos;
+   
    vector<unordered_set<int>>  representacion;
+   
    //O(n)
-   graph(int v,bool pesos = false){
+   graph(int v=1){
     representacion.resize(v);
-    weighted = pesos; 
+   
 
    } 
    //O(1) esperado
@@ -41,16 +40,49 @@ struct graph {
     representacion[vw.second].insert(vw.first);
    }
     //O(1) devuelve un puntero
-   unordered_set <int> vecindarioDe(int vertice){
+   unordered_set <int> vecindarioDe (int vertice) const{
         return representacion[vertice];
     }
     //O(1)
-    int cantVertices(){
+    int cantVertices()const {
         return representacion.size();
+    }
+    void borrarEdge(edge vw){
+        representacion[vw.first].erase(vw.second);
+        representacion[vw.second].erase(vw.first);
     }
    
    
 
+};
+//heredo de grafo, ya que tienen muchas funciones repetidas
+struct weighted_graph : public graph{
+   graph Gsubyacente; 
+   unordered_map<pair<int,int>,int,hash_pair> pesos; 
+  
+   weighted_graph(int n = 0){
+    graph Gsubyacente(n);
+   }
+   
+   void insertar(edge vw,int peso = 1){
+    Gsubyacente.insertar(vw);
+    pesos[vw] = peso;
+
+   }
+   
+   void borrarEdge(edge vw){
+        Gsubyacente.borrarEdge(vw);
+        pesos.erase(vw);
+   }
+   
+   int pesoDe(edge vw) const{
+     if(pesos.find(vw) != pesos.end()){
+        return pesos.at(vw);
+     }else{
+        //Capaz que lo guarde al reves, no lo se en princpio
+        return pesos.at({vw.second,vw.first});
+     }
+   }
 };
 
 struct digraph{
