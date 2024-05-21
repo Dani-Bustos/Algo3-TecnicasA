@@ -4,6 +4,9 @@ using namespace std;
 #define fore(i,a,b) for(int i = a; i< b; i++)
 const int INF = 1e8;
 
+
+//Version iterativa es horrible NO LEER, esta es definitivamente peor en complejidad que la recursiva
+/*
 typedef struct leaf {
     int padre;
     int nivel;
@@ -13,7 +16,6 @@ typedef struct leaf {
         padre = p; nivel = lvl; MinimoNivelBackEdge = Bck;
     }
 } leaf;
-
 vector<edge> AristasPuente(graph & G){
     
     stack<pair<int,int>> AProcesar;
@@ -60,8 +62,51 @@ vector<edge> AristasPuente(graph & G){
     }
     return res;
 }   
+*/
+vector<bool> visitados;
+vector<int> minLvl;
+vector<int> profundidad;
+vector<int> padres;
 
+//Complejidad O(n+m)
+void DFS(graph &G, int actual, int nivel,int padre){
+    if (visitados[actual]) return ;
+    minLvl[actual] = nivel;
+    profundidad[actual] = nivel;
+    visitados[actual] = true;
+    
+    for(auto vecino : G.vecindarioDe(actual)){
+        if(not visitados[vecino]){
+            padres[vecino] = actual;
+            DFS(G,vecino,nivel + 1, actual);
+            minLvl[actual] = min(minLvl[actual],minLvl[vecino]);
+        }else if( vecino != padre){
+            minLvl[actual] = min(minLvl[actual],profundidad[vecino]);
+        }
+        
 
+        
+    }
+     
+}
+
+vector<edge> AristasPuente(graph &G){
+    visitados.resize(G.cantVertices(),false);
+    minLvl.resize(G.cantVertices(),INF);
+   
+    profundidad.resize(G.cantVertices(),INF);
+    padres.resize(G.cantVertices(),-1);
+    
+    DFS(G,0,0,0);
+    
+    vector<edge> res;
+    for(int i = 0; i< minLvl.size();i++){
+        if(minLvl[i] == profundidad[i] && profundidad[i] != 0) {
+            res.push_back({i,padres[i]});
+        }
+    }
+    return res;
+}
 
 int main(){
     
@@ -76,6 +121,6 @@ int main(){
     //G debe ser conexo
     auto res = AristasPuente(G);
     for (edge vertice : res){
-        cout << vertice.first << "," << vertice.second << " ";
+        cout << "(" << vertice.first << "," << vertice.second  << ")" << " ";
     }
 }

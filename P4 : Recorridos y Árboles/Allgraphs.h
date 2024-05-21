@@ -58,7 +58,7 @@ struct graph {
 //heredo de grafo, ya que tienen muchas funciones repetidas
 struct weighted_graph : public graph{
    graph Gsubyacente; 
-   unordered_map<pair<int,int>,int,hash_pair> pesos; 
+   unordered_map<edge,int,hash_pair> pesos; 
   
    weighted_graph(int n = 1) : Gsubyacente(n){}
     
@@ -122,11 +122,11 @@ struct digraph{
     unordered_set <int> vecindarioDe(int vertice){
         return Salida[vertice];
     }
-    //O(d_in(v)) dado que borramos en hashmaps, podria ser mas
+    //O(d_in(v)) dado que borramos en hashmaps, podria ser mas, remueve el vertice dado de todos los vecindarios
     void InutilizarVertice(int vertice){
         //Lo borro de todos los vecindarios
-        auto Invecinos = Entrada[vertice];
-        for(auto vecino : Invecinos){
+        auto In_vecinos = Entrada[vertice];
+        for(auto vecino : In_vecinos){
             Salida[vecino].erase(vertice);
             Entrada[vertice].erase(vecino);
         }
