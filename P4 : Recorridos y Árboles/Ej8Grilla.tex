@@ -1,0 +1,14 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Daniel Bustos, Grilla}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+Generamos un grafo con exactamente $k \times m \times n$ vértices, donde cada vértice representa una posición en la grilla y una congruencia posible para cada $k$. Vamos conectándolos de acuerdo a las posiciones. Es decir, cada nodo tiene entre dos y cuatro conexiones, dependiendo de su posición en la grilla. Luego usamos BFS desde el lugar inicial (siendo este el vértice asignado a esa posición junto con la congruencia inicial) y, dada la propiedad v-geodésica del árbol resultante, sabremos que obtendremos un camino mínimo hasta el $0$.
+
+\end{document}
