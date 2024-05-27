@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Ancho de Banda}
+\author{Daniel Bustos}
+
+\begin{document}
+
+\maketitle
+
+\textit{Una empresa de comunicaciones modela su red usando un grafo \(G\) donde cada arista tiene una
+capacidad positiva que representa su ancho de banda. El ancho de banda de la red es el máximo
+\(k\) tal que \(G_k\) es conexo, donde \(G_k\) es el subgrafo generador de \(G\) que se obtiene de eliminar las
+aristas de peso menor a \(k\).}
+
+\subsection*{a) Proponer un algoritmo eficiente para determinar el ancho de banda de una red dada}
+
+Podemos usar cualquier algoritmo de árbol generador mínimo, tomando pesos negativos a la hora de realizar las elecciones. El menor peso presente en el árbol será nuestro ancho de banda. Demostremoslo:
+
+Sea \(T\) un AGM. Por ser AGM, es conexo. Llamemos \(k\) al mínimo peso presente en el árbol \(T\).
+
+Al ser AGM (por ser construido negativamente), \(T\) es maximin en \(G\), es decir, \(\forall\) camino en \(T\) entre dos vértices, el menor peso presente en él será el máximo posible en \(G\). Sabemos que todo peso presente en \(T\) es \(\geq k\). Por lo tanto, podemos considerar el grafo \(G_k\), que es conexo por ser \(T\) un árbol.
+
+Supongamos que \(\exists G_{k'}\) con \(k < k'\) y \(G_{k'}\) conexo.
+
+Sabemos que como \(G_k\) es maximin, cualquier otro camino entre sus vértices tendrá menor o igual peso mínimo. Luego, para que \(G_{k'}\) sea conexo, necesariamente todos los caminos entre sus vértices deberán tener peso mínimo \(k\), ya que de otra forma \(G_{k'}\) no sería conexo. Sin embargo, esto es absurdo, ya que al ser \(k < k'\), por definición no existen caminos con peso \(k\), por lo tanto \(G_{k'}\) no es conexo.
+
+Queda demostrado lo que queríamos ver: el ancho de banda es igual al menor peso presente en un árbol AGM, construido con cualquier algoritmo, considerando los pesos negativamente.
+
+\subsection*{b) Proponer un algoritmo que dado \(G\) determine el vector \(a_0, \ldots, a_{n-1}\) tal que \(a_i\) es el ancho de banda máximo que se puede obtener si se reemplazan \(i\) aristas de \(G\)}
+
+En el mismo árbol que construimos anteriormente, ordenamos crecientemente las aristas por peso. Vamos reemplazando de principio hacia abajo por peso infinito. El nuevo ancho de banda se actualiza si los mínimos pesos restantes son mayores a los más chicos que había antes de poner la nueva arista "infinita".
+
+\end{document}
