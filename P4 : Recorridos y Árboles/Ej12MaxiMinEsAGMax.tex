@@ -20,7 +20,24 @@ Sabemos que \( \text{bwd}_T(v,w) = \text{bwd}_G(v,w) \ \forall \ v,w \in V(G)\),
 
 Q.V.Q. \(T\) es AGMax, es decir, la suma de sus pesos es máxima y genera a \(G\).
 
-Sea \(T'\) el AGMax que tenga más aristas en común con \(T\). Por ser \(T\) y \(T'\) árboles, ambos tienen \(n-1\) aristas. Sea \(l'\) una arista tal que \(l' \in E(T') \land l' \notin E(T)\). Como ambos tienen la misma cantidad de aristas, 
-\(\exists \ l\) arista tal que \(l \in E(T) \land l \notin E(T')\).
+Sea \(T'\) el AGMax que tenga más aristas en común con \(T\). Por ser \(T\) y \(T'\) árboles, ambos tienen \(n-1\) aristas.
+
+Sea $vw$ una arista en $T$ que no está en $T'$ y llamemos $P$ al único camino que conecta a $v$ y $w$ en $T$. Sea $xy$ la arista de menor peso en $P$. 
+
+Sabemos que por ser maximin, todo camino tiene necesariamente menor o igual valor mínimo entre todo par de vértices. Consideremos el árbol $T'-xy$, que necesariamente tiene dos partes conexas. Si ahora le agregamos la arista $vw$, volvemos a formar un árbol conexo, ya que esta arista nos une dos elementos en particiones distintas, y tenemos nuevamente $n-1$ aristas. Miremos el costo de $T'-\{xy\} \cup \{vw\}$. Ahora vale que:
+
+\[
+c(T') - c(xy) + c(vw) \leq c(T') \leftrightarrow c(vw) \leq c(xy)
+\]
+
+Consideremos ahora los dos casos:
+
+\begin{itemize}
+    \item Si $c(vw) < c(xy)$: Tenemos un absurdo, ya que $xy$ es la arista de menor peso en el camino que conecta a $v$ y $w$ en $T$. Como $vw$ era parte de un camino en un árbol maximin, tenemos que necesariamente $c(xy) < c(vw)$.
+    \item Si $c(vw) = c(xy)$: Entonces tenemos que este nuevo árbol $T'-\{xy\} \cup \{vw\}$ es AGMmax, pero esto es absurdo ya que comparte más aristas con $T$ que $T'$ y es AGMmax. Luego el absurdo provino de suponer que existía una arista distinta, dándonos que $T$ es AGMax por ser minimax.
+\end{itemize}
+
+
+
 
 \end{document}
