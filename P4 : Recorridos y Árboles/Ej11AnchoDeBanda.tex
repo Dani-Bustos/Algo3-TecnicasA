@@ -29,7 +29,7 @@ Sabemos que como \(G_k\) es maximin, cualquier otro camino entre sus vértices t
 
 Queda demostrado lo que queríamos ver: el ancho de banda es igual al menor peso presente en un árbol AGM, construido con cualquier algoritmo, considerando los pesos negativamente.
 
-\subsection*{b) Proponer un algoritmo que dado \(G\) determine el vector \(a_0, \ldots, a_{n-1}\) tal que \(a_i\) es el ancho de banda máximo que se puede obtener si se reemplazan \(i\) aristas de \(G\)}
+\subsection*{b) Proponer un algoritmo que dado \(G\) determine el vector \(a_0, \ldots, a_{n-1}\) tal que \(a_i\) es el ancho de banda máximo que se puede obtener si se reemplazan \(i\) aristas de \(G\) con peso infinito}
 
 En el mismo árbol que construimos anteriormente, ordenamos crecientemente las aristas por peso. Vamos reemplazando de principio hacia abajo por peso infinito. El nuevo ancho de banda se actualiza si los mínimos pesos restantes son mayores a los más chicos que había antes de poner la nueva arista "infinita".
 

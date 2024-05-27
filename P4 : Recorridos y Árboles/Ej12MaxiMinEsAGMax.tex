@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Árbol Maximin es Arbol Generador Maximo}
+\author{Daniel Bustos}
+
+\begin{document}
+
+\maketitle
+
+\textit{Demostrar que \(T\) es un árbol maximin de \(G\) $\leftrightarrow$ \(T\) es un árbol
+generador máximo de \(G\). Concluir que todo grafo conexo \(G\) tiene un árbol maximin que puede
+ser computado con cualquier algoritmo para computar árboles generadores máximos.}
+
+\textbf{\(T\) es un árbol maximin de \(G\) \(\implies\) \(T\) es un AGMax}
+
+Sabemos que \( \text{bwd}_T(v,w) = \text{bwd}_G(v,w) \ \forall \ v,w \in V(G)\), con \(\text{bwd}(v,w)\) el máximo mínimo peso entre todos los posibles caminos dentro del grafo entre \(v\) y \(w\).
+
+Q.V.Q. \(T\) es AGMax, es decir, la suma de sus pesos es máxima y genera a \(G\).
+
+Sea \(T'\) el AGMax que tenga más aristas en común con \(T\). Por ser \(T\) y \(T'\) árboles, ambos tienen \(n-1\) aristas. Sea \(l'\) una arista tal que \(l' \in E(T') \land l' \notin E(T)\). Como ambos tienen la misma cantidad de aristas, 
+\(\exists \ l\) arista tal que \(l \in E(T) \land l \notin E(T')\).
+
+\end{document}
