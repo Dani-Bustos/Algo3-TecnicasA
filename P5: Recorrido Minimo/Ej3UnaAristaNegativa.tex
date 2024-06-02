@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\begin{document}
+
+\section*{3. Una Arista Negativa , Daniel Bustos}
+
+Diseñar un algoritmo eficiente que, dado un digrafo pesado \( G \) y dos vértices \( s \) y \( t \), determine el recorrido mínimo de \( s \) a \( t \) que pasa por a lo sumo una arista de peso negativo. Demostrar que el algoritmo propuesto es correcto.
+
+\subsection*{Idea del algoritmo}
+
+Usamos Dijkstra sobre el grafo sin pesos negativos, tanto desde \( s \) como desde \( t \) sobre \( G \) transpuesto. Obtenemos así las distancias \( d(s, v) \) y \( d(v', t) \forall v, v' \in V(G) \). Luego consideramos los pesos de los caminos que incluyen una arista negativa, definido como: El costo de llegar hasta ellas desde \( s \), sumado el costo de la arista negativa, y desde ellas hasta \( t \) es menor que nuestro mejor camino anterior. Observemos que si la única manera de llegar de \( s \) a \( t \) fuese pasar por más de una arista negativa, entonces la distancia final resultante sería infinito, ya que las distancias que obtenemos en Dijkstra solo consideran que había aristas positivas.
+
+\subsection*{Algoritmo}
+
+\begin{algorithm}[H]
+\caption{Encontrar el recorrido mínimo de \( s \) a \( t \) con a lo sumo una arista de peso negativo}
+\begin{algorithmic}[1]
+\STATE Remover todas las aristas negativas del grafo \( G \).
+
+\vspace{0.5em}
+
+\STATE Ejecutar Dijkstra desde \( s \) y desde \( t \) en el grafo transpuesto.
+
+\vspace{0.5em}
+
+\STATE $\text{candidato} \gets d(s, t)$ \COMMENT{Obtenido del Dijkstra anterior}
+
+\vspace{0.5em}
+
+\FOR{cada arista \( (a, b) \) negativa en \( G \)}
+
+    \vspace{0.5em}
+    
+    \IF{$d(s, a) + c(a, b) + d(b, t) < \text{candidato}$}
+    
+        \vspace{0.5em}
+        
+        \STATE $\text{candidato} \gets d(s, a) + c(a, b) + d(b, t)$
+        
+        \vspace{0.5em}
+        
+    \ENDIF
+\ENDFOR
+
+\vspace{0.5em}
+
+\RETURN \text{candidato}
+
+\end{algorithmic}
+\end{algorithm}
+
+\subsection*{Complejidad}
+
+Sea \( k \) la cantidad de aristas negativas con \( k \leq m \). La complejidad del algoritmo es de: 
+\[ n + m + 2\Theta(m + n \log n) + k \leq O(m + n \log n) \]
+
+\subsection*{Demostración}
+
+Es claro que nuestra solución es:
+\[ \min(\text{Camino mínimo entre } s \text{ y } t \text{ sin negativos}, \min(\text{Camino con una arista negativa entre } s \text{ y } t)) \]
+
+Nuestro algoritmo nos da:
+\[ \min \left( \min(\text{Caminos entre } s \text{ y } t \text{ sin negativos}), \min(d(s, a) + c(a, b) + d(b, t) \mid (a, b) \text{ es una arista negativa}) \right) \]
+
+Es trivial que el camino mínimo entre \( s \) y \( t \) sin aristas negativas es igual a \( \min(\text{Caminos entre } s \text{ y } t \text{ sin negativos}) \).
+
+Para la segunda parte, llamemos 
+\begin{itemize}
+    \item \( P' := \{d(s, a) + c(a, b) + d(b, t) \mid (a, b) \text{ es una arista negativa}\} \)
+    
+    \item \( P \) := los caminos con una arista negativa entre \( s \) y \( t \).
+\end{itemize}
+
+Veamos que \( \min(P) = \min(P') \). Podemos definir al peso de todos los caminos negativos con una arista negativa entre \( s \) y \( t \) exactamente como definimos \( P' \). Luego, sus mínimos deben ser iguales.
+
+
+\end{document}
