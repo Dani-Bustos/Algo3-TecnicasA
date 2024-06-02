@@ -1,0 +1,21 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{14. Kruskal Prioridad Q}
+
+Sea $q : V(G) \rightarrow \mathbb{Z}$ una función inyectiva para un grafo $G$. Demostrar que $G$ tiene un único árbol generador mínimo si y solo si el algoritmo de Kruskal con prioridad $q$ retorna el mismo árbol que el algoritmo de Kruskal con prioridad $-q$.
+
+\textbf{IDA:}
+
+Si tiene un único árbol generador mínimo, el algoritmo de Kruskal retorna siempre ese árbol, indistinto de la prioridad.
+
+\textbf{Vuelta:}
+
+El algoritmo de Kruskal con prioridad $q$ retorna el mismo árbol que el algoritmo de Kruskal con prioridad $-q$ $\implies G$ tiene un único árbol generador mínimo.
+
+Probemos que esto quiere decir que tiene todos los pesos distintos. Para así usar el inciso b del ejercicio anterior (Si todos los pesos son distintos entonces hay un único AGM).
+
+Supongamos que hay dos iguales, llamémoslas $a$ y $b$ con $q(a) > q(b)$. En la prioridad $q$, Kruskal siempre toma $b$ en la primera iteración. Luego, si usamos $-q$, Kruskal toma $b$, pero como los árboles resultantes son iguales, necesariamente $a$ y $b$ son tomados en ambos ordenes. 
+\end{document}

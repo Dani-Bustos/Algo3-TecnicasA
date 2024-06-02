@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+\author{Daniel Bustos}
+\maketitle
+\section*{13. El algoritmo de Kruskal (resp. Prim) con orden de selección}
+
+El algoritmo de Kruskal (resp. Prim) con orden de selección es una variante del algoritmo de Kruskal (resp. Prim) donde a cada arista $e$ se le asigna una prioridad $q(e)$ además de su peso $p(e)$. Luego, si en alguna iteración del algoritmo de Kruskal (resp. Prim) hay más de una arista posible para ser agregada, entre esas opciones se elige alguna de mínima prioridad.
+
+\subsection*{a) Demostrar que para todo árbol generador mínimo $T$ de $G$, si las prioridades de asignación están definidas por la función}
+
+\[
+q_T(e) = \begin{cases}
+    0 & \text{si } e \in T, \\
+    1 & \text{si } e \notin T.
+\end{cases}
+\]
+
+Probemoslo por inducción sobre la cantidad de aristas del árbol generador mínimo:
+
+$P(n) :=$ Dado $T$ AGM con $n$ aristas, usando $q_T$ puedo construirlo con Prim o Kruskal respectivamente.\\
+
+\textbf{Caso base:} $n = 1$. Si hay una sola arista, entonces los algoritmos la toman y no usamos $q_T$, generándonos el árbol.\\
+
+\textbf{Paso Inductivo:}
+
+H.I : $\exists n$ / vale $P(n') \forall n' \leq n$. Q.V.Q: $P(n) \implies P(n+1)$
+
+Por el funcionamiento de Kruskal o Prim, si sacamos una arista nos quedan dos bosques. Estos por H.I pueden ser generados por Prim o Kruskal. Necesariamente esta es la menor arista que conecta a los dos bosques por ser AGM mínima. A la hora de elegir la nueva arista tenemos dos casos: o es la única, en cuyo caso los algoritmos la toman, o hay otra arista segura de igual peso. Si hubiese otra arista segura, por la función $q_T$ vamos a tomar la arista que deseamos, generándonos el árbol.
+
+\subsection*{b) Usando el inciso anterior, demostrar:}
+
+\textbf{Si los pesos de $G$ son todos distintos, $\implies G$ tiene un único árbol generador mínimo.}
+
+Probemos por contrarrecíproco: \\ 
+\textbf{$G$ tiene más de un árbol generador mínimo $\implies$ existen al menos dos pesos en $G$ que son iguales.}
+
+Si hay más de un AGM, podemos mapear cada uno en la función de pesos: como necesariamente obtendremos como resultado a ese AGM cuando cambiamos los mapeos de la función de pesos (punto a), quiere decir que esta fue utilizada, ya que no alteramos nada más. Luego esto quiere decir que necesariamente hay al menos dos aristas de igual peso.
+
+
+\end{document}
