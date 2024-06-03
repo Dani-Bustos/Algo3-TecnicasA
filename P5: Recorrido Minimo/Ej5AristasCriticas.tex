@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+
+\begin{document}
+
+\section*{Problema 5}
+
+Sea \( G \) un digrafo con pesos positivos que tiene dos vértices especiales \( s \) y \( t \). Decimos que una arista \( e \in E(G) \) es crítica para \( s \) y \( t \) cuando \( d_G(s, t) < d_{G-e}(s, t) \). Diseñar un algoritmo eficiente que, dado \( G \), determine las aristas de \( G \) que son críticas para \( s \) y \( t \). Demostrar que el algoritmo es correcto. \textbf{Ayuda}: pensar en el subgrafo \( P \) de \( G \) que está formado por las aristas de caminos mínimos de \( G \) (el grafo de caminos mínimos).
+
+\subsection*{Idea del algoritmo}
+
+Iteramos por todas las aristas; aquellas que no satisfacen la propiedad del ejercicio 1 (sea \( vw \) una arista, es \( s \)-\( t \) eficiente \(\leftrightarrow d(s,v) + c(v,w) + d(w,t)\)) las descartamos, dejándonos un grafo \( P \) donde las únicas aristas son aquellas pertenecientes a caminos mínimos.
+
+Ahora necesitamos encontrar las aristas "puente" del grafo subyacente \( P_{\text{sub}} \) de nuestro digrafo \( P \). Podemos hacerlo utilizando el algoritmo del ejercicio 2 de la guía anterior, con complejidad \( O(n + m) \). Estas serán nuestras aristas críticas para \( s \) y \( t \).
+
+\subsection*{Algoritmo}
+
+\begin{algorithm}[H]
+\caption{Determinar las aristas críticas para \( s \) y \( t \)}
+\begin{algorithmic}[1]
+\STATE Ejecutar Dijkstra desde \( s \) y desde \( t \) en el grafo transpuesto.
+
+\vspace{0.5em}
+
+\STATE Construir el grafo \( P \) con las aristas \( vw \) que son \( s \)-\( t \) eficientes.
+
+\vspace{0.5em}
+
+\STATE Encontrar las aristas puente en el grafo subyacente \( P_{\text{sub}} \).
+
+\vspace{0.5em}
+
+\RETURN Todas las aristas puente como aristas críticas.
+
+\end{algorithmic}
+\end{algorithm}
+
+\subsection*{Demostración}
+
+Es claro que las aristas críticas existen únicamente dentro del conjunto de aristas pertenecientes a caminos mínimos, ya que remover cualquier otra no cambia la distancia. Ya probamos que el criterio del ejercicio 1 nos sirve para identificarlas. Luego, solo debemos probar la afirmación de que considerar las aristas puente del subyacente a \( P \) es equivalente a encontrar las críticas. En rigor:
+
+La arista \( vw \) es crítica en \( G \leftrightarrow vw \) es puente en \( P_{\text{sub}} \).
+
+\subsubsection*{Ida}
+
+La arista \( vw \) es crítica en \( G \implies vw \) es puente en \( P_{\text{sub}} \).
+
+Probémoslo por el contrarrecíproco: \( vw \) no es puente en \( P_{\text{sub}} \implies vw \) no es crítica en \( G \).
+
+Como \( vw \) no es puente en \( P_{\text{sub}} \), removerla no aumenta las partes conexas. Consideremos el efecto de la remoción en \( G \), que nos deja dos posibilidades:
+
+\begin{itemize}
+  \item Existe un camino desde \( v \) hasta \( w \) direccionado, en cuyo caso, como sabíamos que valía \( d(s,v) + c(v,w) + d(w,t) \), y existe un camino de todas aristas \( s \)-\( t \) eficientes, entonces vale que ese camino respeta esta misma propiedad. Luego, \( vw \) no era crítica.
+  
+  \item Existe un camino desde \( v \) hasta \( w \) \textit{únicamente sin considerar las direcciones}, en cuyo caso, como este camino existe, y sus aristas también pertenecen a un camino de \( s \) a \( t \) mínimo que no utiliza a \(vw\), necesariamente no ha cambiado la distancia.
+\end{itemize}
+
+\subsubsection*{Vuelta}
+
+\( vw \) es puente en \( P_{\text{sub}} \implies \) La arista \( vw \) es crítica en \( G \).
+
+Como \( vw \) forma parte de un camino de \( s \) a \( t \) en \( P \), si esta fuese puente, quiere decir que al removerla tenemos dos partes conexas, una que incluye a \( s \) y otra que incluye a \( t \). Como no hay manera de alcanzar una a la otra en \( P \), quiere decir que los únicos caminos restantes son aquellos que están en \( G \) pero no en \( P \), que por definición de \( P \) son necesariamente mayores a los mínimos o no existentes. Luego, \( vw \) es crítica en \( G \)
+
+
+
+\end{document}
