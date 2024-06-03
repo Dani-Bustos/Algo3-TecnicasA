@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Trafico y ciclos puré}
+\author{Daniel Bustos}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Trafico y ciclos puré}
+
+Para organizar el tráfico, la ciudad de Ciclos Positivos ha decidido implementar las cabinas de peaje inverso. La idea de estas cabinas es incentivar la circulación de vehículos por caminos alternativos, estableciendo un monto que se le paga al conductor de un vehículo cuando pasa por la cabina. Estas cabinas inversas se suman a las cabinas regulares, donde el conductor paga por pasar por la cabina. La ciudad sabe que estas nuevas cabinas pueden dar lugar al negocio del ciclo puré, que consiste en transitar eternamente por la ciudad a fin de obtener una ganancia que tienda a infinito. Para evitar esta situación, que genera costos y tráfico adicional, lo cual será aprovechado para desgastar a la administración ante la opinión pública, la ciudad quiere evaluar distintas alternativas antes de llevar las cabinas inversas a la práctica.
+
+\begin{enumerate}
+    \item Modelar el problema de determinar si la ciudad permite el negocio del ciclo puré cuando el costo de transitar por cada cabina $i$ de peaje es $c_i$ ($c_i < 0$ si la cabina es inversa) y el costo que cuesta viajar de forma directa de cada cabina $i$ a cada cabina $j$ es $c_{ij} > 0$.
+    
+    Podemos modelarlo como un digrafo, de la siguiente manera. El costo de las aristas es siempre $c_i + c_{ij}$, con la arista dirigiéndose siempre hacia $c_i$.
+    
+    \item Dar un algoritmo para resolver el problema del inciso anterior, indicando su complejidad temporal.
+    
+    Usamos Bellman-Ford sobre este grafo y este nos dirá si hay un "ciclo negativo", que como las cabinas inversas son negativas, quiere decir que hay un ciclo puré.
+    
+    La complejidad es $O(n \cdot m)$.
+    
+    \item El sistema arrojó que ninguna de las configuraciones deseadas para desincentivar el tráfico evita el negocio de los ciclos puré. Desafortunadamente, el plan se filtró a la prensa y comenzaron las peleas mediáticas. A fin de obtener cierto rédito, desde el departamento de marketing sugieren transformar la idea de cabinas inversas en cabinas mixtas. Cuando un vehículo pasa por una cabina mixta, se le paga al conductor si se le cobró en la cabina anterior; caso contrario, el conductor paga. Obviamente, desde marketing sugieren que se le pague al conductor cuando la cabina mixta sea la primera cabina recorrida para bajar los malos humores.
+    
+    Modelar el problema de determinar si la ciudad permite el negocio de los ciclos puré cuando se aplica la nueva configuración para las cabinas. Además de la información utilizada para el problema original, ahora se conoce cuáles cabinas son mixtas: notar que el monto de cobro es $c_i$ y el monto de pago es $-c_i$ para la cabina mixta $i$ (con $c_i > 0$).
+\end{enumerate}
+
+\end{document}
