@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\section*{6. Peso multiplicativo, Daniel Bustos} En muchas aplicaciones se necesita encontrar caminos de peso multiplicativo mínimo en un digrafo \( D \) pesado con una función positiva \( c : E(G) \rightarrow \mathbb{R}^{>1} \). Formalmente, el peso multiplicativo de un camino \( v_1, \ldots, v_k \) es la multiplicatoria de los pesos de sus aristas. Este tipo de caminos se buscan, por ejemplo, cuando los pesos de las aristas representan probabilidades de eventos independientes y se quiere encontrar una sucesión de eventos con probabilidad máxima/mínima.
+Modelar el problema de camino de peso multiplicativo mínimo como un problema de camino mínimo. Demostrar que el algoritmo es correcto. \textbf{Ayuda:} transformar el peso de cada arista usando una operación conocida que sea creciente y transforme cualquier multiplicatoria en una sumatoria
+
+\subsection*{Idea del algoritmo:}
+
+Como lo que queremos buscar es minimizar el producto de los pesos, que son todos mayores a 1, podemos utilizar la función logaritmo sin problemas, ya que su dominio esta definido en el (1,+ $\infty $) . Este cumple que \( \log(x \cdot y) = \log(x) + \log(y) \), lo que nos permite tomar los pesos como su valor logarítmico para alguna base que elijamos (en este caso base 10), y  utilizar el algoritmo de Dijkstra normal sobre estos pesos. Luego, como sabemos que el logaritmo es biyectivo en \( \mathbb{R}^{>1} \rightarrow \mathbb{R} > 0 \), tenemos una función inversa para recuperar los valores que buscamos sobre este dominio y obtener asi el menor peso multiplicativo para cualquier vertice de nuestro grafo. En este caso, esta sería \( 10^x \).
+
+\subsection*{Demostración:}
+Sea \( v_{\text{min}} \) el mínimo peso multiplicativo de un camino dado desde \( v_1 \) hasta \( v_k \), y \( v_1, v_2, \ldots , v_k \) un camino cualquiera desde \( v_1 \) hasta \( v_k \).
+
+\[
+v_{\text{min}} \leq \prod_{i = 1}^{k} v_i 
+\]
+\[
+ \leftrightarrow \textit{(el logaritmo es creciente, v's todos postivos) }  \log(v_{\text{min}}) \leq \log\left(\prod_{i = 1}^{k} v_i\right)
+\]
+\[
+\leftrightarrow \log(v_{\text{min}}) \leq \log(v_1) + \log(v_2) + \ldots + \log(v_k) = \sum_{i=1}^{k} \log(v_i) 
+\]
+
+Y el algoritmo de Dijkstra nos obtiene el camino mínimo si modelamos el grafo con sus pesos logarítmicos. Luego podemos fácilmente obtener \( v_{\text{min}} \) ya que \( 10^{\log(v_{\text{min}})} = v_{\text{min}} \).
+
+
+
+
+\end{document}
