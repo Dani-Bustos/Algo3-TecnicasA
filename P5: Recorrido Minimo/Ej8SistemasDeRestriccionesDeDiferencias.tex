@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+
+
+\title{Sistemas de Restricciones de Diferencias}
+\author{Daniel Bustos}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{8. Sistema de Restricciones de Diferencias}
+
+Un sistema de restricciones de diferencias (SRD) es un sistema $S$ que tiene $m$ inecuaciones y $n$ incógnitas $x_1, \ldots, x_n$. Cada inecuación es de la forma $x_i - x_j \leq c_{ij}$ para una constante $c_{ij} \in \mathbb{R}$; por cada par $i, j$ existe a lo sumo una inecuación (¿por qué?). Para cada SRD $S$ se puede definir un digrafo pesado $D(S)$ que tiene un vértice $v_i$ por cada incógnita $x_i$ de forma tal que $v_j \to v_i$ es una arista de peso $c_{ij}$ cuando $x_i - x_j \leq  c_{ij}$ es una inecuación de $S$. Asimismo, $S$ tiene un vértice $v_0$ y una arista $v_0 \to v_i$ de peso 0 para todo $1 \leq i \leq n$.\\
+
+Antes de resolver, hagamos una pequeña observación:
+
+Existe a lo sumo una ecuación $x_i - x_j \leq c_{ij}$, ya que si hubiese más de una, podríamos tomar aquella más "fuerte".
+
+Por ejemplo:
+\[
+(1)
+\begin{cases}
+    x_1 - x_2 \leq 5 \\
+    x_1 - x_2 \leq 4
+\end{cases}
+\quad
+\]
+
+En (1) como $x_1 - x_2 \leq 4 \implies x_1 - x_2 \leq 5$, podemos borrar la primera ecuación y el sistema es equivalente. 
+\subsection*{a Demostrar que si $D(S)$ tiene un ciclo de peso negativo, entonces $S$ no tiene solución.}
+Realizar un ciclo en nuestro digrafo asociado, es equivalente a sumar todos los distintos terminos de nuestro sistema de ecuaciones
+Sea $C = x_1, x_2, x_3, \ldots, x_k$ nuestro ciclo, observemos que la primera arista equivale a: $x_2 - x_1$, luego sumarle la segunda arista equivale a 
+
+\[
+x_1 - x_2 + x_2 - x_3 = x_1 - x_3.
+\]
+
+Los términos subsiguientes se van cancelando entre sí (salvo el $x_1$) hasta llegar al último, donde nos queda la ecuación $x_1 - x_1 = 0$. Como toda esta suma debe ser menor o igual a la suma de todos los pesos asociados, si tenemos que $\sum(C) < 0 \implies 0 \leq \sum(C)$ lo cual es absurdo, ya que un número negativo no puede ser mayor o igual a 0. Luego, si hay un ciclo negativo, el sistema no tiene solución, ya que es incompatible.
+
+\subsection*{b.}
+  \textit{Demostrar que si $D(S)$ no tiene ciclos de peso negativo, entonces  \\
+  $\{x_i = d(v_0, v_i) \mid 1 \leq i \leq n\}$ es una solución de $D(S)$. Acá $d(v_0, v_i)$ es la distancia desde $v_0$ a $v_i$ en $D(S)$.} \\
+
+Veamos que es una solución. Sabemos que las distancias desde $v_0$ hacia los demás deben satisfacer lo siguiente: sea $(v_i, v_j) \in E$ 
+\[
+d(v_0, v_j) \leq d(v_0, v_i) + w(v_i, v_j)
+\]
+O lo que es equivalente:
+\[
+d(v_0, v_j) - d(v_0, v_i) \leq w(v_i, v_j)
+\]
+Como esto vale para dos vértices adyacentes cualesquiera, entonces lo planteado en la consigna es solución de nuestro sistema.
+
+\subsection*{c.}
+\textit{A partir de los incisos anteriores, proponer un algoritmo que permita resolver cualquier
+SRD. En caso de no existir solución, el algoritmo debe mostrar un conjunto de inecuaciones
+contradictorias entre sí.} \\
+
+Podemos usar el algoritmo de bellman-ford para obtener las distancias en nuestro grafo. Ademas si hubiese un ciclo negativo, belman nos lo devuevle, y podemos a partir de los vertices que forman parte de el, reconstruir las inecuaciones contradictorias.
+Complejidad : $\Theta(n*m)$
+
+
+\end{document}

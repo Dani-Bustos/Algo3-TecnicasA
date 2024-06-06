@@ -27,6 +27,9 @@ Para organizar el tráfico, la ciudad de Ciclos Positivos ha decidido implementa
     \item El sistema arrojó que ninguna de las configuraciones deseadas para desincentivar el tráfico evita el negocio de los ciclos puré. Desafortunadamente, el plan se filtró a la prensa y comenzaron las peleas mediáticas. A fin de obtener cierto rédito, desde el departamento de marketing sugieren transformar la idea de cabinas inversas en cabinas mixtas. Cuando un vehículo pasa por una cabina mixta, se le paga al conductor si se le cobró en la cabina anterior; caso contrario, el conductor paga. Obviamente, desde marketing sugieren que se le pague al conductor cuando la cabina mixta sea la primera cabina recorrida para bajar los malos humores.
     
     Modelar el problema de determinar si la ciudad permite el negocio de los ciclos puré cuando se aplica la nueva configuración para las cabinas. Además de la información utilizada para el problema original, ahora se conoce cuáles cabinas son mixtas: notar que el monto de cobro es $c_i$ y el monto de pago es $-c_i$ para la cabina mixta $i$ (con $c_i > 0$).
+
+	\item Modelamos el grafo ligeramente distinto, duplicamos las cabinas mixtas y generamos las conexiones de la siguiente manera, si $v_i$ es una cabina que para llegar tuvo una arista positiva, entonces se conecta a sus cabinas adyacentes con arista negativas y viceversa
+
 \end{enumerate}
 
 \end{document}
