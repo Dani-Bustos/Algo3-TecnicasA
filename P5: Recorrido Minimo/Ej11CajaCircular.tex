@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+
+\begin{document}
+
+\section*{CajaCircular}
+
+Nuevamente tenemos a $n$ clientes de un supermercado $\{c_1, c_2, \ldots, c_n\}$ y queremos asignarle a cada uno una caja para hacer la fila. Esta vez, las cajas están ordenadas en forma circular, numeradas de la 1 a la $M$ y se encuentran separadas por pasillos. Entre la caja $M$ y la 1 hay una valla que impide pasar de una a la otra. Durante el proceso de asignación algunos clientes se pelean entre sí y son separados por seguridad. Si dos clientes $c_i$ y $c_j$ se pelean, los guardias les dicen que tienen que ponerse en las cajas que se encuentren separadas por al menos $K_{ij} > 0$ pasillos intermedios en ambos sentidos del círculo, para que no se vuelvan a pelear. Notar que cuando seguridad separa una pelea naturalmente hay un cliente que queda en un número de caja más bajo y el otro en un número de caja más alto. Con la restricción de no volver a acercarse y la valla entre las cajas $M$ y 1 ese orden ya no puede cambiar. ¿Será posible asignarlos a todos?
+
+En este ejercicio una pelea nos implica dos restricciones. Aquí las cajas son un sistema circular, así que tenemos que enfrentar el problema de las distancias usando aritmética modular.
+
+Sea $x_i$ y $x_j$ dos clientes peleados, tal que $x_j$ quedó en una caja de mayor numeración que $x_i$. Para pedir que estén a una distancia mayor a $K_{ij}$ en nuestro sistema circular se debe cumplir lo siguiente:
+\[
+x_j - x_i \geq K_{ij} \land M - (x_j - x_i) \geq K_{ij} 
+\]
+\[
+\leftrightarrow  -K_{ij} \geq x_i - x_j \land   M - K_{ij} \leq x_j - x_i
+\]
+
+Pedido esto, podemos volver a plantear el sistema igual que antes, usando la inecuación con nuestro $z$ imaginario, para que todos los clientes estén entre 1 y $M$.
+
+Sea $m_1$ la cantidad de pelas. Miremos como nos queda el grafo:
+\[
+\text{vertices} = \# \{z,c_0,c_1,\ldots,c_n\} = n + 2 = O(n)
+\]
+\[
+\text{aristas} = 2m_1 + n \leq O(n^2)
+\]
+
+Complejidad de Bellman-Ford = $O(V \cdot E) = O(2nm_1 + n^{2}) \leq O(n^3)$
+
+\end{document}

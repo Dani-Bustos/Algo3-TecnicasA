@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Clientes Amienemigos}
+\author{Daniel Bustos}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+Tenemos $n$ clientes de un supermercado $\{c1, c2, ..., cn\}$ y queremos asignarle a cada uno una caja para hacer la compra. Las cajas están ordenadas en una línea y numeradas de izquierda a derecha de la 1 a la M y se encuentran separadas por pasillos. Durante el proceso de asignación, algunos clientes se pelean entre sí y son separados por seguridad. Si dos clientes $c_i$ y $c_j$ pelean, los guardias les dicen que tienen que ponerse en cajas distintas que se encuentren separadas por $K_{ij} > 0$ pasillos intermedios, para que no se vuelvan a pelear. Notar que cuando la seguridad separa una pelea, naturalmente hay un cliente que queda más a la izquierda (cerca de la caja 1) y el otro más a la derecha (cerca de la caja M). Con la restricción de no volver a acercarse, ese orden ya no puede cambiar. A su vez, hay pares de clientes $c_k$ y $c_m$ que son amigos y no queremos que haya más que $L_{km} = L_{mk} \geq 0$ pasillos intermedios entre las cajas de $c_k$ y $c_m$. ¿Será posible asignarles a todos?
+
+\textbf{Nota:} $K_{ij}$ de alguna manera captura la intensidad de la pelea y $L_{ij}$ captura (inversamente) la intensidad de la amistad. Es posible que dos amigos se peleen y en ese caso hay que cumplir las dos condiciones. Si eso pasa, solo puede haber soluciones si $K_{ij} \leq L_{ij}$. Para todo par de clientes, sabemos si son amigos o si se pelearon, y la intensidad de cada relación. Además, para aquellos clientes que se pelearon, conocemos cuál cliente quedó a la izquierda y cuál a la derecha.
+
+\textbf{Ayuda:} Si tenemos $n$ variables $x_i$ en un SRD y queremos acotarlas entre $A$ y $B$ ($x_i \in [A, B]$), podemos agregar una variable auxiliar $z$, sumar restricciones del tipo $A \leq x_i - z \leq B$, y luego correr la solución para que $z$ sea 0.\\
+
+
+El sistema de restricciones casi viene ya dado en la consigna. Pero hay que contemplar un par de casos extra:
+
+Si dos amigos $x_i, x_j$ se pelean, entonces necesitas que ambos estén acotados de la forma: $K_{ij} \leq x_i - x_j \leq L_{ij}$, donde $x_j$ es el cliente que quedó a la derecha. Para esto planteamos las dos desigualdades en nuestro sistema: $x_j - x_i \leq -K_{ij}$ y $x_i - x_j \leq L_{ij}$.
+
+Luego para todos los clientes del supermercado, necesitamos que estén entre 0 y $M$. Usamos el truco que nos da la consigna: $1 \leq x_i - z \leq M \leftrightarrow z - x_1 \leq -1 \land x_1 - z \leq M$. Luego podemos sumarle la constante $z$ a la solución obtenida, y obtendremos lo que buscamos (Recordar que sumar constantes al sistema no afecta la viabilidad de una solución).
+
+¿Cuántas inecuaciones podemos llegar a tener? Como mínimo tenemos $n$ inecuaciones, por la condición anteriormente mencionada. Llamemos $m1$  a nuestras amistades y $m2$ a nuestras peleas. Tanto $m1$ como $m2$ están acotadas por ${n \choose 2} \le O(n^{2}) $ ya que son simétricas. Luego nuestro grafo nos queda como:
+
+\textbf{Vertices:} $\# \{z,c_0,c_1,... , c_n \} = n + 2 = O(n)$
+
+\textbf{Aristas:} $m1 + m2 + n \leq O(n^{2})$
+
+Luego nuestra complejidad usando Bellman-Ford sobre el SRG es de: $O(V \cdot E) = O(n \cdot (n + m1 + m2)) = O(n^2 + nm1 + nm2) \leq O(n^{3})$.
+
+\end{document}
