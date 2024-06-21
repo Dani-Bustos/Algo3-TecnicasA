@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{amsmath} % for mathematical symbols and environments
+\usepackage{amssymb} % for \mathbb command
+
+\begin{document}
+
+\section*{Encontrar la arista st-eficiente en un digrafo sin ciclos de peso negativo}
+
+Dado un digrafo \( D \) con pesos \( c : E(D) \rightarrow \mathbb{R} \) que no tiene ciclos de peso negativo, queremos encontrar la arista \( v \rightarrow w \) que sea st-eficiente para la mayor cantidad de pares \( s \) y \( t \). Proponer un algoritmo eficiente y simple de programar para resolver este problema. Ayuda: verificar que la propiedad del Ejercicio 1a también es cierta en este caso.
+
+\subsection*{Algoritmo propuesto}
+
+\begin{enumerate}
+    \item Correr Floyd-Warshall sobre el grafo \(\ O(n^{3})\).
+    \item Crear un vector \( \text{mVec} \) de aristas. \(\ O(m)\)
+    \item Para cada arista \( (v,w) \in E(G) \):
+    \begin{enumerate}
+        \item Para cada par de nodos \( (s,t) \) en la matriz:
+        \begin{enumerate}
+            \item Si \( M[s,t] == M[s,v] + c(v,w) + M[w,t] \), entonces \( \text{mVec}[vw]++ \).
+        \end{enumerate}
+    \end{enumerate}
+    \item Tomar la máxima arista del vector \( \text{mVec} \).
+\end{enumerate}
+
+\subsection*{Complejidad}
+
+El algoritmo propuesto tiene una complejidad de \( O(\min(n^{2}m, n^{3})) \), donde \( n \) es el número de nodos y \( m \) es el número de aristas del grafo.
+
+\end{document}

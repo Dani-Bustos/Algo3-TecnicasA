@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{amsmath} % for mathematical symbols and environments
+\usepackage{amsfonts}
+\title{Matriz de Floyd-Warshall en Grafos}
+\author{Matías Waisman, Daniel Bustos}
+\begin{document}
+
+
+\maketitle
+\textit{Decimos que una matriz cuadrada, simetrica y positiva \( M \in \mathbb{N}^{2} \) es de Floyd-Warsha ll (FW) si existe un grafo \( G \) tal que \( M \) es el resultado de aplicar FW a \( G \). Describir un algoritmo para decidir si una matriz \( M \) es FW. En caso afirmativo, el algoritmo debe retornar un grafo \( G \) con la mínima cantidad de aristas posibles tal que el resultado de FW sobre \( G \) sea \( M \). En caso negativo, el algoritmo debe retornar alguna evidencia que pruebe que \( M \) no es FW.} \\
+
+A priori sabemos que si la matriz no es simétrica entonces no es de Floyd-Warshall sobre un grafo. En particular, si la matriz es FW, se debe cumplir que su diagonal sean todos \( 0 \) (ya que la distancia \( d(v,v) = 0 \ \forall v \in V \)). Además, debemos chequear que para todo par de vértices \( s,t \), debe ocurrir que:
+\[
+d(s,t) \leq d(s,w) + d(w,t) \quad \forall w \in V
+\]
+De otra forma, no sería un camino mínimo. Esta condición la podemos chequear en \( \Theta(n^{3}) \). Podemos devolver los 3 nodos que no cumplen esta condición en el caso de que los hubiese, demostrando que la matriz no es FW.
+
+Si se cumplen todas estas condiciones, sabemos que tenemos una matriz FW. Para construir el camino mínimo haremos lo siguiente: 
+\begin{itemize}
+    \item Vamos a "construir" el grafo completo, con los costos como indica la matriz.
+    \item Luego, para cada vértice \( v \), vamos a ver todos sus vecinos \( w \) y ver los vecinos de \( w \), llamados \( x \), y vamos a chequear si \( d(v,w) = d(v,x) + d(x,w) \).
+    \item Si se cumple esto, podemos eliminar la arista que conecta \( v \) y \( w \).
+\end{itemize}
+Esto se puede resolver en complejidad \( \Theta(n^{3}) \), con una implementación muy similar a Floyd-Warshall.
+
+\end{document}
