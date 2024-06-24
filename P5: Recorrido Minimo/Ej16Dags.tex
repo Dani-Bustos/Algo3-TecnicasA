@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\begin{document}
+
+\section*{16. Sea D un digrafo conexo que no tiene ciclos dirigidos, v el único vértice de D con grado de entrada 0 (Dicho vértice siempre existe, ver guías 2 y 3) y $c : E(D) \rightarrow \mathbb{Z}$ una función de pesos.}
+
+\textit{a. Definir una función recursiva $d: V(D) \rightarrow \mathbb{Z}$ tal que $d(w)$ es el peso del camino mínimo de v a w para todo $w \in V(D)$. Ayuda: considerar que el camino mínimo de v a w se obtiene yendo de v hacia z y luego tomando la arista $z \rightarrow w$, para algún vecino de entrada z de w; notar que la función recursiva está bien definida porque D no tiene ciclos.}
+
+\[
+d(w) = \begin{cases} 
+0 & \text{si } w = v \\
+\min_{\text{vecino } z \in N^-(w)} \left( d(z) + c(z, w) \right) & \text{si } w \neq v 
+\end{cases}
+\]
+
+\textit{b. Diseñar un algoritmo de programación dinámica top-down para el problema de camino mínimo en digrafos sin ciclos y calcular su complejidad.} \\
+
+Como nuestra función tiene como máximo $n$ argumentos (uno por cada vértice en el grafo) y claramente hay superposición de subproblemas, entonces podemos usar programación dinámica.
+
+Construimos un vector de $n$ posiciones:
+
+\[
+d(w) = \begin{cases}
+\text{memo}[w] & \text{si memo}[w] \neq \text{INDEF} \\
+0 & \text{si } w = v \\
+\min_{\text{vecino } z \in N^-(w)} \left( d(z) + c(z, w) \right) & \text{si } w \neq v
+\end{cases}
+\]
+
+La complejidad es $O(n +m )$, ya que recorremos todos los nodos y aristas. \\
+
+\textit{c. (Integrador y opcional) Diseñar un algoritmo de programación dinámica bottom-up para el problema. Ayuda: computar $d$ de acuerdo a un orden topológico $v = v_1, \ldots, v_n$ donde $v_i \rightarrow v_j$ solo si $i < j$. Este orden se puede computar en $O(n + m)$ (guía 3).}
+
+\begin{algorithm}
+\caption{Computación de caminos mínimos en un digrafo acíclico (bottom-up)}
+\label{alg:min_paths}
+
+\begin{algorithmic}[1]
+\STATE Computar un orden topológico $v = v_1, \ldots, v_n$ del grafo $D$
+\STATE Inicializar vector $d$ con distancias infinitas: $d[w] = \infty$ para todo $w \in V(D)$
+\STATE $d[v] = 0$
+\FOR{$i = 1$ \TO $n$}
+    \FOR{cada vecino $z$ de $v_i$ en $N^-(v_i)$}
+        \STATE $d[v_i] = \min(d[v_i], d[z] + c(z, v_i))$
+    \ENDFOR
+\ENDFOR
+\end{algorithmic}
+
+\end{algorithm}
+
+\end{document}

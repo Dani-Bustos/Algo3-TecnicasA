@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\begin{document}
+
+\section*{Algoritmo para determinar si un conjunto de vértices es geodésico}
+\textit{15. Dados dos vértices \( v \) y \( w \) de un grafo pesado \( G \), el intervalo entre \( v \) y \( w \) es el conjunto \( I(v, w) \) que contiene a todos los vértices que están en algún recorrido mínimo entre \( v \) y \( w \). Un conjunto de vértices \( D \) es geodésico cuando \( \bigcup_{(v,w)} I(v,w) = V(G) \). Diseñar e implementar un algoritmo de tiempo \( O(n^3) \) que, dado un grafo pesado y conexo \( G \) y un conjunto de vértices \( D \) de \( G \), determine si \( D \) es geodésico.}
+\begin{algorithm}
+\caption{Verificar si un digrafo es geodésico}
+\label{alg:geodesic_check}
+
+\begin{algorithmic}[1]
+\STATE Utilizar el algoritmo de Floyd-Warshall para encontrar las distancias más cortas entre todos los pares de vértices y mantener la matriz de padres $\text{padre}[i][j]$, donde $\text{padre}[i][j]$ es el vértice precedente de $j$ en un camino más corto desde $i$ a $j$.
+\STATE Inicializar un conjunto $R$ como vacío.
+\FOR{cada par de vértices $v, w \in D$}
+    \STATE Recorrer la matriz de padres para el par $(v, w)$ para obtener todos los vértices por los que se pasa en algún camino más corto de $v$ a $w$.
+    \FOR{cada vértice visitado en el camino más corto de $v$ a $w$}
+        \STATE Añadir el vértice visitado al conjunto $R$.
+    \ENDFOR
+\ENDFOR
+\STATE Verificar si $R$ es igual al conjunto de todos los vértices $V(G)$ del grafo $G$:
+    \IF{$R = V(G)$}
+        \STATE Entonces, $D$ es geodésico.
+    \ELSE
+        \STATE En caso contrario, $D$ no es geodésico.
+    \ENDIF
+\end{algorithmic}
+
+\end{algorithm}
+
+El tiempo de ejecución del algoritmo es \( O(n^3) \), donde \( n \) es el número de vértices en \( G \).
+
+\end{document}
