@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Determinar la complejidad del algoritmo de Edmonds y Karp}
+
+Se desea determinar la complejidad del algoritmo de Edmonds y Karp para encontrar el flujo máximo de una red \( N \) cuando:
+
+\begin{enumerate}
+    \item No hay información acerca de las capacidades de las aristas de \( N \).
+    \[
+    O(\min(n^2 m, m \cdot F))
+    \]
+
+    \item Todas las aristas de \( N \) tienen capacidad a lo sumo \( q \ll n \). \\
+    
+    En el peor caso, nuestro flujo máximo es de \( q \cdot n \) (todas las aristas van hacia el sumidero con capacidad máxima), entonces nuestra complejidad es de \( O(m \cdot F) = O(m \cdot n \cdot q)  = O(m^{2}q) \) .
+
+    \item El flujo máximo de \( N \) tiene un valor \( F \ll mn \).
+    \[
+    O(F \cdot m)
+    \]
+\end{enumerate}
+
+\end{document}

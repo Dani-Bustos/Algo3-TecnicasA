@@ -1,0 +1,17 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+4. Proponer un algoritmo lineal que dada una red N y un flujo de valor máximo, encuentre un corte
+de capacidad mínima de N.
+\begin{itemize}
+    \item Queremos construir un corte \( C(S,T) \) con \( s \in S \) y \( t \in T \).
+    \item Como conocemos el flujo que pasa por cada arista, podemos construir la red residual del grafo con flujo máximo.
+    \item Luego, haciendo BFS desde el sumidero \( s \) sobre la red residual, decimos que todo vértice alcanzable pertenece a \( S \) y todo vértice que no alcanzamos está en \( T \).
+    \item Como sabemos que tenemos un flujo máximo, el sumidero \( t \) no será alcanzable desde la red residual (ya que de otra forma tendríamos un camino de aumento y no tendríamos un flujo máximo), por lo tanto podemos asegurar que \( t \in T \).
+    \item Complejidad: \( O(n + m) = O(m) \) (Grafo conexo).
+    
+\end{itemize}
+
+\end{document}
