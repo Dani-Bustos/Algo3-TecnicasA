@@ -5,7 +5,7 @@
 \begin{document}
 2. Para todo $F \in N$, construir una red con 4 vértices y 5 aristas en la que el método de Ford y Fulkerson necesite F iteraciones en peor caso para obtener el flujo de valor máximo (partiendo de un flujo inicial con valor 0) \\ 
 
-En este grafo, en el peor caso el camino de aumento en la red residual siempre tiene un cuello de botella de tamaño 1, luego aumentamos solo de a 1 en cada vez
+En este grafo, en el peor caso el camino de aumento(Siemre tomamos la arisa del medio) en la red residual siempre tiene un cuello de botella de tamaño 1, luego aumentamos el flujo solo de a 1 en cada vez
 
 \tikzstyle{block} = [circle, draw, text centered, minimum height=2em]
 \tikzstyle{line} = [draw, -latex]
@@ -13,16 +13,16 @@ En este grafo, en el peor caso el camino de aumento en la red residual siempre t
 \begin{tikzpicture}[node distance=2cm]
 
 % Nodes
-\node [block] (A) {A};
-\node [block, above right of=A] (B) {B};
-\node [block, below right of=A] (C) {C};
-\node [block, below right of=B] (D) {D};
+\node [block] (A) {s};
+\node [block, above right of=A] (B){} ;
+\node [block, below right of=A] (C) {};
+\node [block, below right of=B] (D) {t};
 
 % Edges with capacities
-\draw [line] (A) -- node[above] {F} (B);
-\draw [line] (A) -- node[left] {F} (C);
-\draw [line] (B) -- node[right] {F} (D);
-\draw [line] (C) -- node[below] {F} (D);
+\draw [line] (A) -- node[above] {F/2} (B);
+\draw [line] (A) -- node[left] {F/2} (C);
+\draw [line] (B) -- node[right] {F/2} (D);
+\draw [line] (C) -- node[below] {F/2} (D);
 \draw [line] (B) -- node[right] {1} (C);
 
 \end{tikzpicture}
