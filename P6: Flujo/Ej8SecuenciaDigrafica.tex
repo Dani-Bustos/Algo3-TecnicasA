@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Definición y Algoritmo para el Problema de Realización de Secuencia Digráfica}
+
+\begin{enumerate}
+  \item Dado un ordenamiento \( v_1, \ldots, v_n \) de los vértices de un digrafo \( D \), se define la secuencia digráfica de \( D \) como \( (d^-(v_1), d^+(v_1)), \ldots, (d^-(v_n), d^+(v_n)) \).
+  \item Dada una secuencia de pares \( d \), el problema de realización de \( d \) consiste en encontrar un digrafo \( D \) cuya secuencia digráfica sea \( d \).
+\end{enumerate}
+
+\section*{Descripción del Algoritmo de Flujo Máximo}
+
+\begin{itemize}
+  \item Definimos dos conjuntos \( v_i^- \) y \( v_i^+ \).
+  \item En el grafo, las relaciones existen solo entre conjuntos. Las relaciones forman un grafo casi completo donde existe la arista \( (v_i^+, v_j^-) \) para todo \( j \neq i \) con capacidad 1.
+  \item Todos los vértices \( v_i^+ \) están conectados a una fuente \( s \) con capacidad \( d^+(v_i) \). Análogamente, todos los vértices \( v_i^- \) están conectados al sumidero con capacidad \( d^-(v_i) \).
+  \item Se utiliza un algoritmo de flujo máximo. El sistema tiene solución si todas las aristas tanto de salida como de entrada están saturadas.
+  \item Si hay flujo por una arista \( (v_i^+, v_j^-) \), entonces en nuestro digrafo solución existe la arista \( (v_i, v_j) \).
+\end{itemize}
+
+
+
+
+
+\section*{Complejidad del Algoritmo}
+
+\begin{itemize}
+  \item \( |V| := n + 2 \)
+  \item \( |E| := 2n + \sum_{i=1}^{n-1} (n - 1) = \frac{n^2}{2} + \frac{3n}{2} \)
+  \item Observemos que en el peor caso, el flujo máximo será \( \sum_{i=1}^{n} (n - 1) = O(n^2) \).
+  \item Usando el algoritmo de Edmonds-Karp, la complejidad es \( O(\min(|V||E|^2, |V| \cdot F)) = O(\min(n^4, n^3)) = O(n^3) \).
+\end{itemize}
+
+\end{document}
