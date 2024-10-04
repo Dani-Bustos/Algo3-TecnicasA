@@ -15,7 +15,7 @@ ll solve(int a, int b){
     }else{
         ll sig = solve(a,b/2); //Division entera, no olvidar
         
-        if( b % 2 == 1) return a*sig*sig; //esto se podria hacer con la funcion tmb, da tiempo cte igualmente
+        if( b % 2 == 1) return a*sig*sig; 
         if(b % 2 == 0) return sig*sig;
     }
         
