@@ -26,7 +26,7 @@ typedef pair<int,int> edge;
 
 struct graph {
    
-   vector<unordered_set<int>>  representacion;
+   vector<list<int>>  representacion;
    
    //O(n)
    graph(int v=1){
