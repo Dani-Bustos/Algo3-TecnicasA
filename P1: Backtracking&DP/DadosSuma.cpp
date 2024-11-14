@@ -5,8 +5,8 @@ using namespace std;
 const int INDEF = -1;
 int k;;//caras del dado  
 vector<vector<int>> MEMO;
-//sin podas sencilas, hay Ω(k^n) llamados recursivos y O(n*(min(n*k,s))) instancias.
-// --> hay superposicion de subproblemas  si n*min(n*k,s) << k^n (se prueba inductivamente)
+//sin podas sencillas, hay Ω(k^n) llamados recursivos y O(n*(min(n*k,s))) instancias.
+// --> hay superposición de subproblemas  si n*min(n*k,s) << k^n (se prueba inductivamente)
 int f(int dados,int num){
     //si restamos de mas o si no hay mas dados o si ya llegamos pero hay mas dados o si es imposible llegar al numero con el maximo posible, cortamos
     if(num < 0 || (dados == 0 && num > 0) || (num == 0 && dados> 0) || num > dados*k){
